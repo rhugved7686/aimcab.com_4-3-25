@@ -423,7 +423,7 @@
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
                 style={{ height: '150px' }}
                 placeholder="Message"
-                rows="5"
+                rows={5}
                 required
               ></textarea>
               <button
