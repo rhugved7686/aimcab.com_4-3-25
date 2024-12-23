@@ -6,11 +6,13 @@ const TripSlice = createSlice({
     reducers:{
         addTripDetails: (state, action)=>{
             state.trip = action.payload
+        },
+        totalDistance: (state, action) =>{
+            state.distance = action.payload
         }
-
     }
 })
 
 
 export default TripSlice.reducer;
-export const {addTripDetails} = TripSlice.actions;
+export const {addTripDetails, totalDistance} = TripSlice.actions;
