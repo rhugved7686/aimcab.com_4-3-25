@@ -1,5 +1,6 @@
   'use client';
   import { useState } from 'react';
+  import { LoadScript, Autocomplete } from '@react-google-maps/api';
 
   export default function Home() {
     const [tripType, setTripType] = useState('One Way');
@@ -65,6 +66,7 @@
 
           {/* Right side: Booking Form */}
           <div className="w-1/3 p-4 bg-gray-100 rounded-lg" id="booking-form">
+          <LoadScript googleMapsApiKey="AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w" libraries={['places']}>
             <form onSubmit={handleSubmit} className="space-y-4">
               <h2 className="text-center text-2xl font-semibold">BOOK A CAB NOW</h2>
 
@@ -87,6 +89,7 @@
               {/* One Way Trip Inputs */}
               {tripType === 'One Way' && (
                 <div>
+                  <Autocomplete>
                   <input
                     className="w-full p-2 mb-2"
                     name="from"
@@ -96,6 +99,8 @@
                     onChange={handleChange}
                     required
                   />
+                  </Autocomplete>
+                  <Autocomplete>
                   <input
                     className="w-full p-2 mb-2"
                     name="to"
@@ -105,6 +110,7 @@
                     onChange={handleChange}
                     required
                   />
+                  </Autocomplete>
                 </div>
               )}
 
@@ -205,6 +211,7 @@
                 Book Now
               </button>
             </form>
+            </LoadScript>
           </div>
         </div>
 
