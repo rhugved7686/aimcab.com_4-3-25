@@ -10,10 +10,9 @@ export const POST = async (req) => {
         // Parse the request body and ensure it's a valid JSON payload
         const data = await req.json();  // Use req.json() to parse JSON request body in Next.js API routes
 
-        // Assuming `Trip` is a Sequelize model, you can save the data to the database here
-        // Example: await Trip.create(data);
+        const trip = await Trip.create({...data});
 
-        return NextResponse.json({ message: "Trip created successfully", data }); // Send a JSON response with a success message
+        return NextResponse.json({ message: "Trip created successfully", trip }); // Send a JSON response with a success message
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: "Error creating trip", error: error.message }, { status: 500 });

@@ -229,7 +229,7 @@ const Trip = sequelize.define('Trip', {
     allowNull: true,
   },
 }, {
-  tableName: 'trips', // Optional: specify the table name if it's different from model name
+  tableName: 'user_booking', // Optional: specify the table name if it's different from model name
   timestamps: false,   // Set to true if you have 'createdAt' and 'updatedAt' columns
 });
 

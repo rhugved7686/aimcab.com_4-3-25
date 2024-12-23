@@ -1,6 +1,9 @@
   'use client';
   import { useState } from 'react';
   import { LoadScript, Autocomplete } from '@react-google-maps/api';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import {addTripDetails} from "../store/TripSlice";
 
   export default function Home() {
     const [tripType, setTripType] = useState('One Way');
@@ -16,6 +19,7 @@
       email: '',
       selectPackage: '4', // Default package for rental
     });
+    const dispatch = useDispatch();
 
     const handleSelectChange = (e) => {
       setTripType(e.target.value);
@@ -29,9 +33,27 @@
       });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      alert('Form Submitted!');
+
+      // const data = await axios.post("/api/booking", {...formData, tripType});
+
+      // dispatch(addTripDetails(data));
+
+      const destinationService = new window.google.maps.DirectionsService();
+      const request = {
+        origin: "pune",
+        destination: "kharadi",
+        travelMode: window.google.maps.TravelMode.DRIVING, // Change this based on your travel mode
+      };
+
+
+      destinationService.route(request, (result, status)=>{
+        console.log(result);
+      })
+
+
+      // alert('Form Submitted!');
     };
 
     return (
