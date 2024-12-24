@@ -3,7 +3,6 @@
 'use client'; // This line tells Next.js that this component uses client-side features like React hooks.
 
 import { useState } from 'react';
-import Home from '../Index';
 
 export default function Navbar() {
   // State for mobile menu toggle
