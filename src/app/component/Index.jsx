@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LoadScript, Autocomplete } from '@react-google-maps/api';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import {addTripDetails, totalDistance} from "../../store/TripSlice";
+import {addTripDetails, totalDistance, updateDropCity, updatePickupCity} from "../../store/TripSlice";
 import {useRouter} from 'next/navigation';
 
 export default function Home() {
@@ -22,6 +22,9 @@ export default function Home() {
   });
   const dispatch = useDispatch();
   const router = useRouter();
+  const pickupRef = useRef();
+  const dropRef = useRef();
+
 
   const handleSelectChange = (e) => {
     setTripType(e.target.value);
@@ -29,6 +32,7 @@ export default function Home() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -38,11 +42,22 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const data = await axios.post("/api/booking", {...formData, tripType});
+    const body = {
+      name : formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      user_pickup: formData.from,
+      user_drop: formData.to,
+      user_trip_type: tripType
+    }
 
-    // dispatch(addTripDetails(data));
+    
+
+    
 
     const destinationService = new window.google.maps.DirectionsService();
+    const geocoder = new window.google.maps.Geocoder();
+
     const request = {
       origin: formData.from,
       destination: formData.to,
@@ -51,13 +66,26 @@ export default function Home() {
 
 
     destinationService.route(request, (result, status)=>{
-      console.log(result.routes[0].legs[0].distance.value / 1000);
-      dispatch(totalDistance(result.routes[0].legs[0].distance.value / 1000));
+      console.log(result);
+      dispatch(addTripDetails({...body, distance: (result.routes[0].legs[0].distance.value / 1000)}));
     })
 
     router.push('/about');
-    // alert('Form Submitted!');
   };
+
+
+
+  const handlePlaceChanged = (field)=>{
+    const place = field.getPlace();
+
+    if(place && place.formatted_address){
+      setFormData((prevData)=>({
+        ...prevData,
+        [field === pickupRef.current ? 'from' : 'to']: place.formatted_address, // Update from or to field
+      }));
+    }
+
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -114,8 +142,9 @@ export default function Home() {
             {/* One Way Trip Inputs */}
             {tripType === 'One Way' && (
               <div>
-                <Autocomplete>
+                <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
                 <input
+                  id='pickup-location'
                   className="w-full p-2 mb-2"
                   name="from"
                   type="text"
@@ -125,8 +154,9 @@ export default function Home() {
                   required
                 />
                 </Autocomplete>
-                <Autocomplete>
+                <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
                 <input
+                  id="drop-location"
                   className="w-full p-2 mb-2"
                   name="to"
                   type="text"
