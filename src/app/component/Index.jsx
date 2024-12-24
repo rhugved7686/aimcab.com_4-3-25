@@ -229,12 +229,14 @@ export default function Home() {
               />
             </div>
 
-            <button
-              className="w-full p-2 bg-yellow-500 text-white font-semibold"
-              type="submit"
-            >
-              Book Now
-            </button>
+            <a
+  href="/Booking" // Replace with your target URL
+  className="w-full p-2 bg-yellow-500 text-white font-semibold text-center block"
+>
+  Book Now
+</a>
+
+
           </form>
           </LoadScript>
         </div>
