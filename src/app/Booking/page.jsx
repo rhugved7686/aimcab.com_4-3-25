@@ -24,35 +24,55 @@ export default function Home() {
     const fetchedCars = [
       {
         id: 1,
-        name: 'Maruti Ertiga',
-        model: 'SUV',
-        description: 'For 6 + 1, CNG/Diesel, USB Charging, Music System, Air Conditioning.',
+        name: 'Hatchback',
+        model: 'Hatchback',
+        description: 'Compact, efficient, and stylish. Our hatchback cars offer the perfect blend of practicality and fun for city driving.',
         price: 5000,
         image: '/images/ertiga.png',
+        facilities: [
+          { name: 'Free Snacks', icon: '/images/snacks.png' },
+          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Newspaper', icon: '/images/news.jpg' }
+        ]
       },
       {
         id: 2,
-        name: 'Innova Crysta',
-        model: 'MUV',
-        description: 'For 6 + 1, CNG/Diesel, USB Charging, Music System, Air Conditioning.',
+        name: 'Sedan',
+        model: 'Sedan',
+        description: 'Elegant and spacious, our sedans provide a smooth and comfortable ride for every journey.',
         price: 7000,
         image: '/images/innova.png',
+        facilities: [
+          { name: 'Free Snacks', icon: '/images/snacks.png' },
+          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Newspaper', icon: '/images/news.jpg' }
+        ]
       },
       {
         id: 3,
-        name: 'Luxury',
-        model: 'Sedan',
-        description: 'Comfortable and spacious with advanced features.',
+        name: 'SUV',
+        model: 'SUV',
+        description: 'Rugged and versatile, our SUVs are perfect for both urban roads and adventurous terrains.',
         price: 4000,
         image: '/images/luxury.png',
+        facilities: [
+          { name: 'Free Snacks', icon: '/images/snacks.png' },
+          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Newspaper', icon: '/images/news.jpg' }
+        ]
       },
       {
         id: 4,
-        name: 'Maruti',
-        model: 'SUV',
-        description: 'Luxury 7-seater SUV with top-notch features.',
+        name: 'MUV',
+        model: 'MUV',
+        description: 'MUVs offer spacious interiors and powerful performance for both city and off-road travels.',
         price: 12000,
         image: '/images/maruti.png',
+        facilities: [
+          { name: 'Free Snacks', icon: '/images/snacks.png' },
+          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Newspaper', icon: '/images/news.jpg' }
+        ]
       },
       // Add more cars as needed
     ];
@@ -66,7 +86,7 @@ export default function Home() {
       <header className="bg-[#CDC7C7] w-full">
         <nav className="bg-[#CDC7C7] mb-0">
           <ul className="flex space-x-4 p-4">
-            <li>Home</li>
+            <a href="/HomePage" >Home</a>
             <li>About</li>
             <li className="relative">
               <button className="dropdown">Services</button>
@@ -99,12 +119,29 @@ export default function Home() {
           <h2 className="text-3xl font-semibold text-center">Our Cars</h2>
           <p className="text-lg text-center mt-4">Choose from a variety of cars based on your preferences.</p>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Horizontal Scroll Container */}
+          <div className="mt-8 overflow-x-auto flex space-x-8 pb-8">
             {cars.map((car) => (
-              <div key={car.id} className="card p-6 bg-white shadow-lg rounded-lg">
-                <img src={car.image} alt={car.name} className="w-full h-56 object-cover rounded-lg" />
+              <div key={car.id} className="card p-6 bg-white shadow-lg rounded-lg w-80">
+                <img src={car.image} alt={car.name} className="w-90 h-30 object-cover rounded-lg" /> {/* Updated to reduce image width */}
                 <h3 className="text-2xl mt-4">{car.name}</h3>
                 <p className="mt-4 text-lg">{car.description}</p>
+
+                {/* Facilities Section */}
+<div className={car.id === 3 ? "mt-[70px]" : car.id === 4 ? "mt-[50px]" : "mt-4"}>  
+  {/* Apply different margins for SUV (id=3) and MUV (id=4) */}
+  <h4 className="text-lg font-semibold">Facilities:</h4>
+  <ul className="mt-2">
+    {car.facilities.map((facility, index) => (
+      <li key={index} className="flex items-center mt-2">
+        <img src={facility.icon} alt={facility.name} className="w-8 h-8 mr-2" />
+        <p>{facility.name}</p>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
                 <div className="mt-4 flex justify-between items-center">
                   <p className="text-xl font-semibold">Rs. {car.price}/-</p>
                   <button className="px-6 py-2 bg-gradient-to-r from-[#faa499] to-[#ffc55c] rounded-lg">
