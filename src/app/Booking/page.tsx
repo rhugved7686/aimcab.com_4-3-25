@@ -15,8 +15,8 @@ export default function Home() {
         price: 5000,
         image: '/images/ertiga.png',
         facilities: [
-          { name: 'Free Snacks', icon: '/images/snacks.png' },
-          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Snacks', icon: '/images/snacks.png' },
+          { name: 'Water Bottle', icon: '/images/water.jpg' },
           { name: 'Newspaper', icon: '/images/news.jpg' }
         ]
       },
@@ -28,8 +28,8 @@ export default function Home() {
         price: 7000,
         image: '/images/innova.png',
         facilities: [
-          { name: 'Free Snacks', icon: '/images/snacks.png' },
-          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Snacks', icon: '/images/snacks.png' },
+          { name: 'Water Bottle', icon: '/images/water.jpg' },
           { name: 'Newspaper', icon: '/images/news.jpg' }
         ]
       },
@@ -41,8 +41,8 @@ export default function Home() {
         price: 4000,
         image: '/images/luxury.png',
         facilities: [
-          { name: 'Free Snacks', icon: '/images/snacks.png' },
-          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Snacks', icon: '/images/snacks.png' },
+          { name: 'Water Bottle', icon: '/images/water.jpg' },
           { name: 'Newspaper', icon: '/images/news.jpg' }
         ]
       },
@@ -54,8 +54,8 @@ export default function Home() {
         price: 12000,
         image: '/images/maruti.png',
         facilities: [
-          { name: 'Free Snacks', icon: '/images/snacks.png' },
-          { name: 'Free Water Bottle', icon: '/images/water.jpg' },
+          { name: 'Snacks', icon: '/images/snacks.png' },
+          { name: 'Water Bottle', icon: '/images/water.jpg' },
           { name: 'Newspaper', icon: '/images/news.jpg' }
         ]
       },
