@@ -170,23 +170,6 @@ export default function Home() {
         required
       />
     </Autocomplete>
-    <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
-    <input
-      className="w-1/2 p-2 mb-2"
-      name="date"
-      type="date"
-      value={formData.date}
-      onChange={handleChange}
-      required
-    />
-    <input
-      className="w-1/2 p-2 mb-2"
-      name="time"
-      type="time"
-      value={formData.time}
-      onChange={handleChange}
-      required
-    />
   </div>
 )}
 
@@ -260,49 +243,6 @@ export default function Home() {
 {/* Rental Package Selection */}
 {tripType === 'Rental' && (
   <div>
-    <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
-      <input
-        id='pickup-location'
-        className="w-full p-2 mb-2"
-        name="from"
-        type="text"
-        placeholder="PickUp Location"
-        value={formData.from}
-        onChange={handleChange}
-        required
-      />
-    </Autocomplete>
-    <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
-      <input
-        id="drop-location"
-        className="w-full p-2 mb-2"
-        name="to"
-        type="text"
-        placeholder="Drop Location"
-        value={formData.to}
-        onChange={handleChange}
-        required
-      />
-    </Autocomplete>
-
-    {/* Choose Date and Time for Round Trip */}
-    <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
-    <input
-      className="w-1/2 p-2 mb-2"
-      name="date"
-      type="date"
-      value={formData.date}
-      onChange={handleChange}
-      required
-    />
-    <input
-      className="w-1/2 p-2 mb-2"
-      name="time"
-      type="time"
-      value={formData.time}
-      onChange={handleChange}
-      required
-    />
     <h5 className="text-left text-sm">Choose Package</h5>
     <select
       className="w-full p-2 bg-yellow-300"
@@ -347,6 +287,7 @@ export default function Home() {
     required
   />
 </div>
+
 
 
             <a

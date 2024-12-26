@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { LoadScript, Autocomplete } from '@react-google-maps/api';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addTripDetails, totalDistance, updateDropCity, updatePickupCity } from "../../store/TripSlice";
-import { useRouter } from 'next/navigation';
+import {addTripDetails, totalDistance, updateDropCity, updatePickupCity} from "../../store/TripSlice";
+import {useRouter} from 'next/navigation';
 
 
 export default function Home() {
@@ -20,13 +20,11 @@ export default function Home() {
     phone: '',
     email: '',
     selectPackage: '4', // Default package for rental
-    pickup:"",
-    drop:""
   });
   const dispatch = useDispatch();
   const router = useRouter();
-  const pickupRef = useRef(null);
-  const dropRef = useRef(null);
+  const pickupRef = useRef();
+  const dropRef = useRef();
 
 
   const handleSelectChange = (e) => {
@@ -46,17 +44,17 @@ export default function Home() {
     e.preventDefault();
 
     const body = {
-      name: formData.name,
+      name : formData.name,
       email: formData.email,
       phone: formData.phone,
-      user_pickup: formData.pickup,
-      user_drop: formData.drop,
+      user_pickup: formData.from,
+      user_drop: formData.to,
       user_trip_type: tripType
     }
 
+    
 
-
-
+    
 
     const destinationService = new window.google.maps.DirectionsService();
     const geocoder = new window.google.maps.Geocoder();
@@ -68,36 +66,27 @@ export default function Home() {
     };
 
 
-    destinationService.route(request, (result, status) => {
+    destinationService.route(request, (result, status)=>{
       console.log(result);
-      if (result.routes[0].legs[0]) {
-        dispatch(addTripDetails({ ...body, distance: (result.routes[0].legs[0].distance.value / 1000) }));
+      if(result.routes[0].legs[0]){
+        dispatch(addTripDetails({...body, distance: (result.routes[0].legs[0].distance.value / 1000)}));
       }
-
+      
     })
 
-    router.push('/Booking');
+    router.push('/about');
   };
 
 
 
-  const handlePlaceChanged = (field) => {
+  const handlePlaceChanged = (field)=>{
     const place = field.getPlace();
-    console.log(place)
-    if (place && place.formatted_address) {
-      const geocoder = new window.google.maps.Geocoder();
 
-      geocoder.geocode({ address: place.formatted_address }, (result, status) => {
-        if(result.length > 0){
-          console.log(result[0]);
-          setFormData((prevData) => ({
-            ...prevData,
-            [field === pickupRef.current ? 'pickup' : 'drop']: result[0].address_components.length === 6 ? result[0].address_components[1].short_name : result[0].address_components[1].short_name, // Update from or to field
-            [field === pickupRef.current ? 'from' : 'to']: place.formatted_address
-          }));
-        }
-      })
-      
+    if(place && place.formatted_address){
+      setFormData((prevData)=>({
+        ...prevData,
+        [field === pickupRef.current ? 'from' : 'to']: place.formatted_address, // Update from or to field
+      }));
     }
 
   }
@@ -134,224 +123,284 @@ export default function Home() {
 
         {/* Right side: Booking Form */}
         <div className="w-1/3 p-4 bg-gray-100 rounded-lg" id="booking-form">
-          <LoadScript googleMapsApiKey="AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w" libraries={['places']}>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <h2 className="text-center text-2xl font-semibold">BOOK A CAB NOW</h2>
+        <LoadScript googleMapsApiKey="AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w" libraries={['places']}>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <h2 className="text-center text-2xl font-semibold">BOOK A CAB NOW</h2>
 
-              {/* Trip Type Selection */}
-              <div className="space-y-2">
-                <h4 className="text-left text-sm">Trip Type</h4>
-                <select
-                  className="w-full p-2 bg-yellow-300"
-                  name="trip"
-                  value={tripType}
-                  onChange={handleSelectChange}
-                  required
-                >
-                  <option value="One Way">One Way Trip</option>
-                  <option value="Round">Round Trip</option>
-                  <option value="Rental">Rental</option>
-                </select>
-              </div>
+            {/* Trip Type Selection */}
+            <div className="space-y-2">
+  <h4 className="text-left text-sm">Trip Type</h4>
+  <select
+    className="w-full p-2 bg-yellow-300"
+    name="trip"
+    value={tripType}
+    onChange={handleSelectChange}
+    required
+  >
+    <option value="One Way">One Way Trip</option>
+    <option value="Round">Round Trip</option>
+    <option value="Rental">Rental</option>
+  </select>
+</div>
 
-              {/* One Way Trip Inputs */}
-              {tripType === 'One Way' && (
-                <div>
-                  <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
-                    <input
-                      id='pickup-location'
-                      className="w-full p-2 mb-2"
-                      name="from"
-                      type="text"
-                      placeholder="PickUp Location"
-                      value={formData.from}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
-                    <input
-                      id="drop-location"
-                      className="w-full p-2 mb-2"
-                      name="to"
-                      type="text"
-                      placeholder="Drop Location"
-                      value={formData.to}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                </div>
-              )}
+{/* One Way Trip Inputs */}
+{tripType === 'One Way' && (
+  <div>
+    <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
+      <input
+        id='pickup-location'
+        className="w-full p-2 mb-2"
+        name="from"
+        type="text"
+        placeholder="PickUp Location"
+        value={formData.from}
+        onChange={handleChange}
+        required
+      />
+    </Autocomplete>
+    <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
+      <input
+        id="drop-location"
+        className="w-full p-2 mb-2"
+        name="to"
+        type="text"
+        placeholder="Drop Location"
+        value={formData.to}
+        onChange={handleChange}
+        required
+      />
+    </Autocomplete>
+    <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="date"
+      type="date"
+      value={formData.date}
+      onChange={handleChange}
+      required
+    />
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="time"
+      type="time"
+      value={formData.time}
+      onChange={handleChange}
+      required
+    />
+  </div>
+)}
 
-              {/* Rental Package Selection */}
-              {tripType === 'Rental' && (
-                <div>
-                  <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
-                    <input
-                      id='pickup-location'
-                      className="w-full p-2 mb-2"
-                      name="from"
-                      type="text"
-                      placeholder="PickUp Location"
-                      value={formData.from}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
-                    <input
-                      id="drop-location"
-                      className="w-full p-2 mb-2"
-                      name="to"
-                      type="text"
-                      placeholder="Drop Location"
-                      value={formData.to}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <h5 className="text-left text-sm">Choose Package</h5>
-                  <select
-                    className="w-full p-2 bg-yellow-300"
-                    name="mySelect"
-                    value={formData.selectPackage}
-                    onChange={handleChange}
-                  >
-                    <option value="4">4Hrs 40Kms</option>
-                    <option value="6">6Hrs 60Kms</option>
-                    <option value="8">8Hrs 80Kms</option>
-                  </select>
-                </div>
-              )}
+{/* Round Trip Inputs */}
+{tripType === 'Round' && (
+  <div>
+    {/* Pickup and Drop Locations for Round Trip */}
+    <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
+      <input
+        id='pickup-location'
+        className="w-full p-2 mb-2"
+        name="from"
+        type="text"
+        placeholder="PickUp Location"
+        value={formData.from}
+        onChange={handleChange}
+        required
+      />
+    </Autocomplete>
+    <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
+      <input
+        id="drop-location"
+        className="w-full p-2 mb-2"
+        name="to"
+        type="text"
+        placeholder="Drop Location"
+        value={formData.to}
+        onChange={handleChange}
+        required
+      />
+    </Autocomplete>
 
-              {/* Date and Time Inputs */}
-              <div>
-                
-                <h5 className="text-left text-sm">Choose Date and Time</h5>
-                <input
-                  className="w-1/2 p-2 mb-2"
-                  name="date"
-                  type="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  className="w-1/2 p-2 mb-2"
-                  name="time"
-                  type="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+    {/* Choose Date and Time for Round Trip */}
+    <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="date"
+      type="date"
+      value={formData.date}
+      onChange={handleChange}
+      required
+    />
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="time"
+      type="time"
+      value={formData.time}
+      onChange={handleChange}
+      required
+    />
 
-              {/* Return Date and Time (for Round Trip) */}
-              {tripType === 'Round' && (
-                <div>
-                  
-                  <h5 className="text-left text-sm">Return Date and Time</h5>
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="dateend"
-                    type="date"
-                    value={formData.dateend}
-                    onChange={handleChange}
-                  />
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="timeend"
-                    type="time"
-                    value={formData.timeend}
-                    onChange={handleChange}
-                  />
-                </div>
-              )}
+    {/* Return Date and Time */}
+    <h5 className="text-left text-sm mt-4">Return Date and Time</h5>
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="dateend"
+      type="date"
+      value={formData.dateend}
+      onChange={handleChange}
+    />
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="timeend"
+      type="time"
+      value={formData.timeend}
+      onChange={handleChange}
+    />
+  </div>
+)}
 
-              {/* Personal Details Inputs */}
-              <div>
-                <input
-                  className="w-full p-2 mb-2"
-                  name="name"
-                  type="text"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  className="w-full p-2 mb-2"
-                  name="phone"
-                  type="tel"
-                  placeholder="Your Phone Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  className="w-full p-2 mb-2"
-                  name="email"
-                  type="email"
-                  placeholder="Your Email ID"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+{/* Rental Package Selection */}
+{tripType === 'Rental' && (
+  <div>
+    <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
+      <input
+        id='pickup-location'
+        className="w-full p-2 mb-2"
+        name="from"
+        type="text"
+        placeholder="PickUp Location"
+        value={formData.from}
+        onChange={handleChange}
+        required
+      />
+    </Autocomplete>
+    <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
+      <input
+        id="drop-location"
+        className="w-full p-2 mb-2"
+        name="to"
+        type="text"
+        placeholder="Drop Location"
+        value={formData.to}
+        onChange={handleChange}
+        required
+      />
+    </Autocomplete>
+    <h5 className="text-left text-sm">Choose Package</h5>
+    <select
+      className="w-full p-2 bg-yellow-300"
+      name="mySelect"
+      value={formData.selectPackage}
+      onChange={handleChange}
+    >
+      <option value="4">4Hrs 40Kms</option>
+      <option value="6">6Hrs 60Kms</option>
+      <option value="8">8Hrs 80Kms</option>
+    </select>
+    {/* Choose Date and Time for Round Trip */}
+    <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="date"
+      type="date"
+      value={formData.date}
+      onChange={handleChange}
+      required
+    />
+    <input
+      className="w-1/2 p-2 mb-2"
+      name="time"
+      type="time"
+      value={formData.time}
+      onChange={handleChange}
+      required
+    />
+  </div>
+)}
 
-              <button
+{/* Personal Details Inputs */}
+<div>
+  <input
+    className="w-full p-2 mb-2"
+    name="name"
+    type="text"
+    placeholder="Your Name"
+    value={formData.name}
+    onChange={handleChange}
+    required
+  />
+  <input
+    className="w-full p-2 mb-2"
+    name="phone"
+    type="tel"
+    placeholder="Your Phone Number"
+    value={formData.phone}
+    onChange={handleChange}
+    required
+  />
+  <input
+    className="w-full p-2 mb-2"
+    name="email"
+    type="email"
+    placeholder="Your Email ID"
+    value={formData.email}
+    onChange={handleChange}
+    required
+  />
+</div>
 
-                className="w-full p-2 bg-yellow-500 text-white font-semibold text-center block"
-              >
-                Book Now
-              </button>
 
 
-            </form>
+            <a
+  href="/Booking" // Replace with your target URL
+  className="w-full p-2 bg-yellow-500 text-white font-semibold text-center block"
+>
+  Book Now
+</a>
+
+
+          </form>
           </LoadScript>
         </div>
       </div>
 
       {/* Offer Section */}
-      <section className="text-center mt-10">
-        <div className="container mx-auto w-full max-w-screen-xl">
-          <div className="bg-light p-1">
-            <div className="flex justify-between">
-              <div className="w-1/2 p-5 flex justify-center">
-                <iframe
-                  width="300"
-                  height="250"
-                  src="https://www.youtube.com/embed/gdr4h2QZuFg"
-                  title="Hurry Up !! ..Book Your Cab & Get Flat 15% Discount. Aim Cab Pvt Ltd -Car rental service in Pune"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="mx-auto"
-                ></iframe>
-              </div>
+<section className="text-center mt-10">
+<div className="container mx-auto w-full max-w-screen-xl">
+  <div className="bg-light p-1">
+    <div className="flex justify-between">
+      <div className="w-1/2 p-5 flex justify-center">
+        <iframe
+          width="300"
+          height="250"
+          src="https://www.youtube.com/embed/gdr4h2QZuFg"
+          title="Hurry Up !! ..Book Your Cab & Get Flat 15% Discount. Aim Cab Pvt Ltd -Car rental service in Pune"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="mx-auto"
+        ></iframe>
+      </div>
 
-              <div className="w-1/2 p-3">
-                <h4 className="text-center bg-yellow-500 text-white rounded p-2">
-                  15% on All First Ride
-                </h4>
-                <h5 className="mt-4">Get flat 15% Off on all rides using website</h5>
-                <h5>All Credit/Debit Cards</h5>
-                <h5>UPI Payments</h5>
-                <h5>
-                  Use Coupon Code:{" "}
-                  <span className="text-white bg-yellow-500 rounded p-2">
-                    AIMNEW15
-                  </span>
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="w-1/2 p-3">
+        <h4 className="text-center bg-yellow-500 text-white rounded p-2">
+          15% on All First Ride
+        </h4>
+        <h5 className="mt-4">Get flat 15% Off on all rides using website</h5>
+        <h5>All Credit/Debit Cards</h5>
+        <h5>UPI Payments</h5>
+        <h5>
+          Use Coupon Code:{" "}
+          <span className="text-white bg-yellow-500 rounded p-2">
+            AIMNEW15
+          </span>
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-      <br></br>
-      <br></br>
+            <br></br>
+            <br></br>
 
       {/* About Section */}
       <section className="about_section layout_padding" id="about">
@@ -396,159 +445,159 @@ export default function Home() {
       </section>
 
       <section className="service_section layout_padding" id="service">
-        <div className="container mx-auto">
-          <div className="heading_container text-center mb-10">
-            <h2 className="text-4xl font-bold">
-              Our <br />
-              Services
-            </h2>
+      <div className="container mx-auto">
+        <div className="heading_container text-center mb-10">
+          <h2 className="text-4xl font-bold">
+            Our <br />
+            Services
+          </h2>
+        </div>
+        <div className="service_container grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+          {/* Luxury Cars */}
+          <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
+            <div className="img-box mb-4">
+              <img src="/images/lexi.png" alt="Taxi" height="90" width="90" />
+            </div>
+            <div className="detail-box">
+              <h5 className="text-xl font-semibold mb-2">Luxury Cars</h5>
+              <p className="text-gray-600 mb-4">Available All type Luxury Cars</p>
+              <a
+                href="#LuxuryCarsBooking.tsx"
+                className="text-blue-500 underline"
+                title="Book Now"
+              >
+                Book Now
+              </a>
+            </div>
           </div>
-          <div className="service_container grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-            {/* Luxury Cars */}
-            <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
-              <div className="img-box mb-4">
-                <img src="/images/lexi.png" alt="Taxi" height="90" width="90" />
-              </div>
-              <div className="detail-box">
-                <h5 className="text-xl font-semibold mb-2">Luxury Cars</h5>
-                <p className="text-gray-600 mb-4">Available All type Luxury Cars</p>
-                <a
-                  href="#LuxuryCarsBooking.tsx"
-                  className="text-blue-500 underline"
-                  title="Book Now"
-                >
-                  Book Now
-                </a>
-              </div>
-            </div>
 
-            {/* Corporate */}
-            <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
-              <div className="img-box mb-4">
-                <img src="/images/s6.png" alt="S6" height="100" width="80" />
-              </div>
-              <div className="detail-box">
-                <h5 className="text-xl font-semibold mb-2">Corporate</h5>
-                <p className="text-gray-600 mb-4">All type of Cab for Corporation</p>
-                <a href="tel:9130030054" className="text-blue-500 underline" title="Call Us">
-                  Call Us
-                </a>
-              </div>
+          {/* Corporate */}
+          <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
+            <div className="img-box mb-4">
+              <img src="/images/s6.png" alt="S6" height="100" width="80" />
             </div>
-
-            {/* Daily Pickup & Drop */}
-            <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
-              <div className="img-box mb-4">
-                <img src="/images/s7.png" alt="S7" height="100" width="100" />
-              </div>
-              <div className="detail-box">
-                <h5 className="text-xl font-semibold mb-2">Daily Pickup & Drop</h5>
-                <p className="text-gray-600 mb-4">Daily Cab Service</p>
-                <a href="tel:9130030054" className="text-blue-500 underline" title="Call Us">
-                  Call Us
-                </a>
-              </div>
+            <div className="detail-box">
+              <h5 className="text-xl font-semibold mb-2">Corporate</h5>
+              <p className="text-gray-600 mb-4">All type of Cab for Corporation</p>
+              <a href="tel:9130030054" className="text-blue-500 underline" title="Call Us">
+                Call Us
+              </a>
             </div>
+          </div>
 
-            {/* Out Station Cab */}
-            <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
-              <div className="img-box mb-4">
-                <img src="/images/out.png" alt="Out" width="100" height="100" />
-              </div>
-              <div className="detail-box">
-                <h5 className="text-xl font-semibold mb-2">Out Station Cab</h5>
-                <p className="text-gray-600 mb-4">All type of Cab for Outstation trip</p>
-                <a
-                  href="https://aimcabbooking.com/#booking-form"
-                  className="text-blue-500 underline"
-                  title="Fill the Form"
-                >
-                  Book Now
-                </a>
-              </div>
+          {/* Daily Pickup & Drop */}
+          <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
+            <div className="img-box mb-4">
+              <img src="/images/s7.png" alt="S7" height="100" width="100" />
             </div>
+            <div className="detail-box">
+              <h5 className="text-xl font-semibold mb-2">Daily Pickup & Drop</h5>
+              <p className="text-gray-600 mb-4">Daily Cab Service</p>
+              <a href="tel:9130030054" className="text-blue-500 underline" title="Call Us">
+                Call Us
+              </a>
+            </div>
+          </div>
 
-            {/* Airport Transport */}
-            <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
-              <div className="img-box mb-4">
-                <img src="/images/airy.png" alt="Airy" height="100" width="100" />
-              </div>
-              <div className="detail-box">
-                <h5 className="text-xl font-semibold mb-2">Airport Transport</h5>
-                <p className="text-gray-600 mb-4">Airport Pickup & Drop Service</p>
-                <a href="tel:9130030054" className="text-blue-500 underline" title="Call Us">
-                  Call Us
-                </a>
-              </div>
+          {/* Out Station Cab */}
+          <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
+            <div className="img-box mb-4">
+              <img src="/images/out.png" alt="Out" width="100" height="100" />
+            </div>
+            <div className="detail-box">
+              <h5 className="text-xl font-semibold mb-2">Out Station Cab</h5>
+              <p className="text-gray-600 mb-4">All type of Cab for Outstation trip</p>
+              <a
+                href="https://aimcabbooking.com/#booking-form"
+                className="text-blue-500 underline"
+                title="Fill the Form"
+              >
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          {/* Airport Transport */}
+          <div className="box bg-white p-6 rounded-lg shadow-lg text-center">
+            <div className="img-box mb-4">
+              <img src="/images/airy.png" alt="Airy" height="100" width="100" />
+            </div>
+            <div className="detail-box">
+              <h5 className="text-xl font-semibold mb-2">Airport Transport</h5>
+              <p className="text-gray-600 mb-4">Airport Pickup & Drop Service</p>
+              <a href="tel:9130030054" className="text-blue-500 underline" title="Call Us">
+                Call Us
+              </a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* Contact Section */}
-      <section className="contact_section py-12 bg-gray-200" id="contact">
-        <div className="container mx-auto text-center mb-10">
-          <h2 className="text-4xl font-bold">Any Problems? Any Questions?</h2>
-        </div>
-        <div className="container-fluid flex flex-wrap justify-center">
-          {/* Contact Form */}
-          <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6">
-            <div className="contact_form p-6 bg-white shadow-lg rounded-lg">
-              <h4 className="text-2xl font-semibold mb-6">Get In Touch</h4>
-              <form action="index.php" method="POST">
-                <input
-                  type="text"
-                  name="full_name"
-                  placeholder="Full Name"
-                  className="w-full p-3 mb-4 border border-gray-300 rounded"
-                  required
+    {/* Contact Section */}
+     <section className="contact_section py-12 bg-gray-200" id="contact">
+          <div className="container mx-auto text-center mb-10">
+            <h2 className="text-4xl font-bold">Any Problems? Any Questions?</h2>
+          </div>
+          <div className="container-fluid flex flex-wrap justify-center">
+            {/* Contact Form */}
+            <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6">
+              <div className="contact_form p-6 bg-white shadow-lg rounded-lg">
+                <h4 className="text-2xl font-semibold mb-6">Get In Touch</h4>
+                <form action="index.php" method="POST">
+                  <input
+                    type="text"
+                    name="full_name"
+                    placeholder="Full Name"
+                    className="w-full p-3 mb-4 border border-gray-300 rounded"
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email ID"
+                    className="w-full p-3 mb-4 border border-gray-300 rounded"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="phone"
+                    placeholder="Phone Number"
+                    className="w-full p-3 mb-4 border border-gray-300 rounded"
+                    required
+                  />
+                  <textarea
+                    name="message"
+                    className="w-full p-3 mb-4 border border-gray-300 rounded"
+                    style={{ height: '150px' }}
+                    placeholder="Message"
+                    rows={5}
+                    required
+                  ></textarea>
+                  <button
+                    type="submit"
+                    name="message_submit"
+                    value="submit"
+                    className="w-full py-3 bg-yellow-400 text-white font-semibold rounded"
+                  >
+                    Send
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            {/* Contact Image */}
+            <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6">
+              <div className="img-box">
+                <img
+                  src="/images/slider-2.png"
+                  alt="Contact"
+                  className="w-full h-full object-cover"
                 />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email ID"
-                  className="w-full p-3 mb-4 border border-gray-300 rounded"
-                  required
-                />
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="Phone Number"
-                  className="w-full p-3 mb-4 border border-gray-300 rounded"
-                  required
-                />
-                <textarea
-                  name="message"
-                  className="w-full p-3 mb-4 border border-gray-300 rounded"
-                  style={{ height: '150px' }}
-                  placeholder="Message"
-                  rows={5}
-                  required
-                ></textarea>
-                <button
-                  type="submit"
-                  name="message_submit"
-                  value="submit"
-                  className="w-full py-3 bg-yellow-400 text-white font-semibold rounded"
-                >
-                  Send
-                </button>
-              </form>
+              </div>
             </div>
           </div>
-
-          {/* Contact Image */}
-          <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6">
-            <div className="img-box">
-              <img
-                src="/images/slider-2.png"
-                alt="Contact"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* Why Choose Us Section */}
       <section className="why_section layout_padding py-12">
@@ -651,7 +700,7 @@ export default function Home() {
         </div>
       </section>
 
-
+      
     </div>
   );
 }
