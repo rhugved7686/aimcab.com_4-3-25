@@ -1,8 +1,23 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTripPrice } from '../../store/TripSlice';
 
 export default function Home() {
   const [cars, setCars] = useState([]);
+  const state = useSelector(state => state.trip);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log(state);
+    if(state.trip){
+      console.log(state.trip);
+      dispatch(getTripPrice({pickup:state.trip.user_pickup, drop:state.trip.user_drop, tripType:state.trip.user_trip_type}));
+    }
+
+
+    
+  },[state])
 
   useEffect(() => {
     // Example car data; you can replace this with an API call

@@ -13,6 +13,9 @@ const About = () => {
       console.log(state.trip);
       dispatch(getTripPrice({pickup:state.trip.user_pickup, drop:state.trip.user_drop, tripType:state.trip.user_trip_type}));
     }
+
+
+    
   },[state])
 
   return (
