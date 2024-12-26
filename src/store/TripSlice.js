@@ -1,45 +1,44 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 
 
 export const getTripPrice = createAsyncThunk(
-    "getTripPrice", async ({pickup, drop, tripType})=>{
-        const geocoder = new window.google.maps.Geocoder();
-        let a ="";
-        let b = "";
-        geocoder.geocode({address: pickup}, (result ,status)=>{
-            a = result;
-        })
+    "getTripPrice", async (data) => {
+        console.log(data);
+        try {
+            const data2 = await axios.post("/api/prices", data);
 
-        geocoder.geocode({address: pickup}, (result ,status)=>{
-            b = result;
-        })
+            console.log(data2);
+            return "not found";
 
-        console.log(a,b);
+        } catch (error) {
+            console.log(error)
+        }
     }
 )
 
 
 
 const TripSlice = createSlice({
-    name:"Trip",
-    initialState:{},
-    reducers:{
-        addTripDetails: (state, action)=>{
+    name: "Trip",
+    initialState: {},
+    reducers: {
+        addTripDetails: (state, action) => {
             state.trip = action.payload;
         },
-        totalDistance: (state, action) =>{
+        totalDistance: (state, action) => {
             state.distance = action.payload;
         },
-        updatePickupCity : (state, action)=>{
-            state.trip = {...state.trip, pickupCity : action.payload}
+        updatePickupCity: (state, action) => {
+            state.trip = { ...state.trip, pickupCity: action.payload }
         },
-        updateDropCity : (state, action) =>{
-            state.trip = {...state.trip, dripCity : action.payload}
+        updateDropCity: (state, action) => {
+            state.trip = { ...state.trip, dripCity: action.payload }
         }
     },
-    extraReducers: (builder)=>{
-        builder.addCase(getTripPrice.fulfilled, (state, action)=>{
+    extraReducers: (builder) => {
+        builder.addCase(getTripPrice.fulfilled, (state, action) => {
             console.log("here is trip prices");
         })
     }
@@ -47,4 +46,4 @@ const TripSlice = createSlice({
 
 
 export default TripSlice.reducer;
-export const {addTripDetails, totalDistance, updatePickupCity, updateDropCity} = TripSlice.actions;
+export const { addTripDetails, totalDistance, updatePickupCity, updateDropCity } = TripSlice.actions;
