@@ -67,7 +67,10 @@ export default function Home() {
 
     destinationService.route(request, (result, status)=>{
       console.log(result);
-      dispatch(addTripDetails({...body, distance: (result.routes[0].legs[0].distance.value / 1000)}));
+      if(result.routes[0].legs[0]){
+        dispatch(addTripDetails({...body, distance: (result.routes[0].legs[0].distance.value / 1000)}));
+      }
+      
     })
 
     router.push('/about');
