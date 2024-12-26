@@ -188,6 +188,7 @@ export default function Home() {
             )}
 
             {/* Date and Time Inputs */}
+            
             <div>
               <h5 className="text-left text-sm">Choose Date and Time</h5>
               <input
@@ -210,6 +211,7 @@ export default function Home() {
 
             {/* Return Date and Time (for Round Trip) */}
             {tripType === 'Round' && (
+              
               <div>
                 <h5 className="text-left text-sm">Return Date and Time</h5>
                 <input

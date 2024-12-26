@@ -2,7 +2,6 @@
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
-
 export default function City() {
   const router = useRouter(); // Initialize the router
   const {city} = useParams();

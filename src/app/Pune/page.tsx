@@ -16,7 +16,7 @@ export default function PuneRoute() {
         <h2 className="text-2xl font-semibold text-center text-gray-700">Popular Routes in Pune</h2>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-        <a href="/container/city" className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+        <a href="/component/city" className="p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300">
             <h3 className="text-xl font-semibold text-green-500">Demo</h3>
             <p className="text-gray-600 mt-2">A comfortable and hassle-free ride from Pune to Mumbai, ensuring you reach your destination with ease.</p>
           </a>
@@ -102,111 +102,111 @@ export default function PuneRoute() {
             <h3 className="text-xl font-semibold text-green-500">Pune to Baramati</h3>
             <p className="text-gray-600 mt-2">Take a smooth drive from Pune to Baramati, a city known for its agricultural significance, vibrant culture, and historical landmarks.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToLavasa" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Lavasa</h3>
             <p className="text-gray-600 mt-2">Enjoy a scenic drive from Pune to Lavasa, a picturesque hill station known for its stunning lake views, vibrant architecture, and serene atmosphere.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToDapoli" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Dapoli</h3>
             <p className="text-gray-600 mt-2">Embark on a relaxing journey from Pune to Dapoli, a coastal town known for its pristine beaches, tranquil environment, and historical forts.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToGanpatiPule" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Ganpati Pule</h3>
             <p className="text-gray-600 mt-2">Take a peaceful drive from Pune to Ganpatipule, a coastal town famous for its serene beaches and the revered Ganapati temple.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToRatnagiri" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Ratnagiri</h3>
             <p className="text-gray-600 mt-2">Enjoy a scenic drive from Pune to Ratnagiri, a coastal gem known for its beautiful beaches, historic forts, and delicious Alphonso mangoes.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToIslampur" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Islampur</h3>
             <p className="text-gray-600 mt-2">Take a smooth journey from Pune to Islampur, a town known for its agricultural richness, scenic landscapes, and peaceful atmosphere.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToKarad" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Karad</h3>
             <p className="text-gray-600 mt-2">Enjoy a peaceful drive from Pune to Karad, a town known for its beautiful landscapes, historical sites, and the confluence of the Krishna and Koyna rivers.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToChiplun" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Chiplun</h3>
             <p className="text-gray-600 mt-2">Embark on a scenic drive from Pune to Chiplun, a charming town nestled between the Western Ghats and the Arabian Sea, known for its lush greenery and tranquil surroundings.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToSangli" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Sangli</h3>
             <p className="text-gray-600 mt-2">Take a pleasant drive from Pune to Sangli, a city known for its rich cultural heritage, famous vineyards, and the historic Sangli Fort.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToMiraj" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Miraj</h3>
             <p className="text-gray-600 mt-2">Enjoy a scenic journey from Pune to Miraj, a city known for its historical significance, rich culture, and the famous Miraj Fort.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToHubali" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Hubali</h3>
             <p className="text-gray-600 mt-2">Embark on a journey from Pune to Hubli, a vibrant city in Karnataka known for its rich cultural heritage, thriving markets, and proximity to scenic attractions like the Unkal Lake.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold text-green-500">Pune to Balgaon</h3>
+          <a href="/PuneToBelgaon" className="p-6 bg-white rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold text-green-500">Pune to Belgaon</h3>
             <p className="text-gray-600 mt-2">Take a scenic drive from Pune to Belgaum, a city known for its historical landmarks, lush greenery, and the famous Belgaum Fort.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToNippani" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Nippani</h3>
             <p className="text-gray-600 mt-2">Enjoy a drive from Pune to Nippani, a town known for its cultural heritage, vibrant markets, and its proximity to the beautiful hills and forests of Karnataka.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToGoa" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Goa</h3>
             <p className="text-gray-600 mt-2">Set off on a scenic drive from Pune to Goa, where you can enjoy beautiful beaches, vibrant nightlife, and a blend of cultural heritage and natural beauty.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToMalvan" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Malvan</h3>
             <p className="text-gray-600 mt-2">Take a picturesque drive from Pune to Malvan, a coastal town known for its pristine beaches, vibrant marine life, and the historic Sindhudurg Fort.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToKarwar" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Karwar</h3>
             <p className="text-gray-600 mt-2">Enjoy a scenic journey from Pune to Karwar, a coastal town known for its serene beaches, beautiful landscapes, and rich maritime history.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToHyderabad" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Hyderabad</h3>
             <p className="text-gray-600 mt-2">Take a journey from Pune to Hyderabad, a vibrant city famed for its historic monuments, delectable cuisine, and a fusion of old-world charm and modernity.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToBanglore" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Banglore</h3>
             <p className="text-gray-600 mt-2">Embark on a scenic drive from Pune to Bangalore, a bustling tech hub known for its pleasant climate, lush gardens, and vibrant cultural scene.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToIndore" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Indore</h3>
             <p className="text-gray-600 mt-2">Take a road trip from Pune to Indore, a vibrant city known for its rich history, delectable street food, and a perfect blend of traditional culture and modern life.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToUjjain" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Ujjain</h3>
             <p className="text-gray-600 mt-2">Travel from Pune to Ujjain, a city renowned for its ancient temples, spiritual heritage, and the famous Kumbh Mela, offering a peaceful and divine experience.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToNagpur" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Nagpur</h3>
             <p className="text-gray-600 mt-2">Take a road trip from Pune to Nagpur, a vibrant city known for its rich history, cultural landmarks, and being the 'Orange City' of India.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToAmravati" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Amravati</h3>
             <p className="text-gray-600 mt-2">Journey from Pune to Amravati, a city known for its rich agricultural heritage, historical sites, and vibrant cultural traditions.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToDhule" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Dhule</h3>
             <p className="text-gray-600 mt-2">Travel from Pune to Dhule, a city known for its historical significance, vibrant culture, and as a key commercial hub in Maharashtra.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToJalgaon" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Jalgaon</h3>
             <p className="text-gray-600 mt-2">Embark on a journey from Pune to Jalgaon, a city famous for its banana production, historical sites, and the nearby Ajanta Caves, a UNESCO World Heritage site.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToJalna" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Jalna</h3>
             <p className="text-gray-600 mt-2">Travel from Pune to Jalna, a city known for its agricultural prosperity, particularly in cotton and grapes, as well as its rich cultural and historical heritage.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToBeed" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Beed</h3>
             <p className="text-gray-600 mt-2">Journey from Pune to Beed, a historic city in Maharashtra, known for its ancient temples, agricultural significance, and vibrant local culture.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToBarshi" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Barshi</h3>
             <p className="text-gray-600 mt-2">Travel from Pune to Barshi, a town renowned for its historical landmarks, temples, and agricultural significance in the Maharashtra region.</p>
           </a>
-          <a href="/PuneToSatara" className="p-6 bg-white rounded-lg shadow-lg">
+          <a href="/PuneToAkkalkot" className="p-6 bg-white rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold text-green-500">Pune to Akkalkot</h3>
             <p className="text-gray-600 mt-2">Embark on a journey from Pune to Akkalkot, a town famous for the revered Shri Swaminarayan Temple and its spiritual significance in Maharashtra.</p>
           </a>
