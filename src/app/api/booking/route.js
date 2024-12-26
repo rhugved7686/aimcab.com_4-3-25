@@ -1,5 +1,5 @@
 import Trip from "../../../model/Trip"
-import { initializeDatabase } from "../../../utils/connectDB";
+import sequelize, { initializeDatabase } from "../../../utils/connectDB";
 import { NextResponse } from "next/server";
 
 // Ensure the database connection is initialized
@@ -19,6 +19,4 @@ export const POST = async (req) => {
     }
 };
 
-export const GET = () => {
-    return NextResponse.json({ message: "Hello World" });  // Return a JSON response
-};
+

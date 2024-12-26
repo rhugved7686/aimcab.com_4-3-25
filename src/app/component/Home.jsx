@@ -3,7 +3,7 @@
 import React from 'react'
 import Navbar from '../../container/component/Navbar';
 import Footer from '../../container/component/Footer';
-import Index from '../component/Index';
+import Index from '../HomePage';
 
 
 const Home = () => {

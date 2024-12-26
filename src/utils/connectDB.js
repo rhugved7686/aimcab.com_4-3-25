@@ -1,7 +1,7 @@
 import {Sequelize} from "sequelize";
 import mysql from "mysql2"
 
-const sequelize = new Sequelize("aimcab","root","password",{
+const sequelize = new Sequelize("cab_booking_website","root","password",{
     dialect:"mysql",
     host:"localhost",
     dialectModule:mysql,
