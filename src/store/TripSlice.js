@@ -4,7 +4,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getTripPrice = createAsyncThunk(
     "getTripPrice", async ({pickup, drop, tripType})=>{
-        console.log(pickup, drop, tripType)
+        const geocoder = new window.google.maps.Geocoder();
+        let a ="";
+        let b = "";
+        geocoder.geocode({address: pickup}, (result ,status)=>{
+            a = result;
+        })
+
+        geocoder.geocode({address: pickup}, (result ,status)=>{
+            b = result;
+        })
+
+        console.log(a,b);
     }
 )
 
