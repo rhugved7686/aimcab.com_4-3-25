@@ -2,83 +2,80 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTripPrice } from '../../store/TripSlice';
+import axios from 'axios';
 
 export default function Home() {
   const [cars, setCars] = useState([]);
   const state = useSelector(state => state.trip);
-  const dispatch = useDispatch();
 
   useEffect(()=>{
-    console.log(state);
+
     if(state.trip){
-      console.log(state.trip);
-      dispatch(getTripPrice({pickup:state.trip.user_pickup, drop:state.trip.user_drop, tripType:state.trip.user_trip_type}));
+      const getPrice = async ({pickup, drop, tripType})=>{
+        const data = await axios.post("/api/prices", {pickup, drop, tripType});
+        const fetchedCars = [
+          {
+            id: 1,
+            name: 'Hatchback',
+            model: 'Hatchback',
+            description: 'Compact, efficient, and stylish. Our hatchback cars offer the perfect blend of practicality and fun for city driving.',
+            price: data.data.data[0].hatchback * Math.floor(state.trip.distance),
+            image: '/images/ertiga.png',
+            facilities: [
+              { name: 'Snacks', icon: '/images/snacks.png' },
+              { name: 'Water Bottle', icon: '/images/water.jpg' },
+              { name: 'Newspaper', icon: '/images/news.jpg' }
+            ]
+          },
+          {
+            id: 2,
+            name: 'Sedan',
+            model: 'Sedan',
+            description: 'Elegant and spacious, our sedans provide a smooth and comfortable ride for every journey.',
+            price: data.data.data[0].sedan * Math.floor(state.trip.distance),
+            image: '/images/innova.png',
+            facilities: [
+              { name: 'Snacks', icon: '/images/snacks.png' },
+              { name: 'Water Bottle', icon: '/images/water.jpg' },
+              { name: 'Newspaper', icon: '/images/news.jpg' }
+            ]
+          },
+          {
+            id: 3,
+            name: 'SUV',
+            model: 'SUV',
+            description: 'Rugged and versatile, our SUVs are perfect for both urban roads and adventurous terrains.',
+            price: data.data.data[0].suv * Math.floor(state.trip.distance) ,
+            image: '/images/luxury.png',
+            facilities: [
+              { name: 'Snacks', icon: '/images/snacks.png' },
+              { name: 'Water Bottle', icon: '/images/water.jpg' },
+              { name: 'Newspaper', icon: '/images/news.jpg' }
+            ]
+          },
+          {
+            id: 4,
+            name: 'MUV',
+            model: 'MUV',
+            description: 'MUVs offer spacious interiors and powerful performance for both city and off-road travels.',
+            price: data.data.data[0].suvplus * Math.floor(state.trip.distance),
+            image: '/images/maruti.png',
+            facilities: [
+              { name: 'Snacks', icon: '/images/snacks.png' },
+              { name: 'Water Bottle', icon: '/images/water.jpg' },
+              { name: 'Newspaper', icon: '/images/news.jpg' }
+            ]
+          },
+          // Add more cars as needed
+        ];
+        console.log(data.data.data[0]);
+        setCars(fetchedCars)
+      }
+      getPrice({pickup: state.trip.pickup, drop: state.trip.drop, tripType: state.trip.user_trip_type});
     }
-
-
-    
   },[state])
 
-  useEffect(() => {
-    // Example car data; you can replace this with an API call
-    const fetchedCars = [
-      {
-        id: 1,
-        name: 'Hatchback',
-        model: 'Hatchback',
-        description: 'Compact, efficient, and stylish. Our hatchback cars offer the perfect blend of practicality and fun for city driving.',
-        price: 5000,
-        image: '/images/ertiga.png',
-        facilities: [
-          { name: 'Snacks', icon: '/images/snacks.png' },
-          { name: 'Water Bottle', icon: '/images/water.jpg' },
-          { name: 'Newspaper', icon: '/images/news.jpg' }
-        ]
-      },
-      {
-        id: 2,
-        name: 'Sedan',
-        model: 'Sedan',
-        description: 'Elegant and spacious, our sedans provide a smooth and comfortable ride for every journey.',
-        price: 7000,
-        image: '/images/innova.png',
-        facilities: [
-          { name: 'Snacks', icon: '/images/snacks.png' },
-          { name: 'Water Bottle', icon: '/images/water.jpg' },
-          { name: 'Newspaper', icon: '/images/news.jpg' }
-        ]
-      },
-      {
-        id: 3,
-        name: 'SUV',
-        model: 'SUV',
-        description: 'Rugged and versatile, our SUVs are perfect for both urban roads and adventurous terrains.',
-        price: 4000,
-        image: '/images/luxury.png',
-        facilities: [
-          { name: 'Snacks', icon: '/images/snacks.png' },
-          { name: 'Water Bottle', icon: '/images/water.jpg' },
-          { name: 'Newspaper', icon: '/images/news.jpg' }
-        ]
-      },
-      {
-        id: 4,
-        name: 'MUV',
-        model: 'MUV',
-        description: 'MUVs offer spacious interiors and powerful performance for both city and off-road travels.',
-        price: 12000,
-        image: '/images/maruti.png',
-        facilities: [
-          { name: 'Snacks', icon: '/images/snacks.png' },
-          { name: 'Water Bottle', icon: '/images/water.jpg' },
-          { name: 'Newspaper', icon: '/images/news.jpg' }
-        ]
-      },
-      // Add more cars as needed
-    ];
-
-    setCars(fetchedCars);
-  }, []);
+  
 
   return (
     <div>

@@ -10,7 +10,7 @@ export const POST =async (req) => {
         const type = tripType == "One Way" ? "oneway_trip" : tripType == "Round" ? "round_trip" : "rental_trip";
         const data = await sequelize.query(`Select * from ${type} where destination_city like '%${pickup}%' and source_city like '%${drop}%' limit 10`);
         console.log(type);
-        return NextResponse.json({ message: "Data fetch successfully", data});
+        return NextResponse.json({ message: "Data fetch successfully", data: data[0]});
         
     } catch (error) {
         console.log(error.message);
