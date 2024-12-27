@@ -83,7 +83,7 @@ export default function Home() {
       <header className="bg-[#CDC7C7] w-full">
         <nav className="bg-[#CDC7C7] mb-0">
           <ul className="flex space-x-4 p-4">
-            <a href="/HomePage" >Home</a>
+            <a href="/HomePae" g>Home</a>
             <li>About</li>
             <li className="relative">
               <button className="dropdown">Services</button>
