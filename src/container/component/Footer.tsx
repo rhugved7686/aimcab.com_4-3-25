@@ -93,7 +93,7 @@ export default function Footer() {
           <b>Popular Cities:</b>
           <div className="flex flex-wrap justify-center mt-2">
             <a href="/Pune" className="text-yellow-400 hover:text-white mx-2">Pune</a>
-            <a href="https://www.aimcabbooking.com/mumbai/" className="text-yellow-400 hover:text-white mx-2">Mumbai</a>
+            <a href="/Mumbai/" className="text-yellow-400 hover:text-white mx-2">Mumbai</a>
             <a href="https://www.aimcabbooking.com/Goa/" className="text-yellow-400 hover:text-white mx-2">Goa City</a>
             <a href="https://www.aimcabbooking.com/mahabaleshwar/" className="text-yellow-400 hover:text-white mx-2">Mahabaleshwar</a>
             <a href="https://www.aimcabbooking.com/lonavala" className="text-yellow-400 hover:text-white mx-2">Lonavala</a>
