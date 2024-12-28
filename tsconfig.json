@@ -21,14 +21,16 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "src/app/Booking/page.jsx"  ],
+    "**/*.tsx",
+    "src/app/Booking/page.jsx"
+  ],
   "exclude": [
     "node_modules"
   ]

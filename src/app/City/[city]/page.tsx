@@ -6,7 +6,7 @@ export default function City() {
   const router = useRouter(); // Initialize the router
   const {city} = useParams();
   const handleBookNowClick = () => {
-    router.push('/HomePage'); // Navigates to the index page
+    router.push('/'); // Navigates to the index page
   };
 
   return (
