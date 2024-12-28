@@ -45,6 +45,10 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const diff = new Date(formData.dateend).getTime() - new Date(formData.date).getTime();
+    const day = diff / (1000* 3600 * 24);
+    console.log(day);
+
     const body = {
       name: formData.name,
       email: formData.email,
@@ -52,16 +56,35 @@ export default function Home() {
       user_pickup: formData.pickup,
       user_drop: formData.drop,
       user_trip_type: tripType,
-      pickup: formData.pickup,
-      drop: formData.drop
+      pickup_location: formData.pickup,
+      drop_location: formData.drop,
+      days: (day+1),
+      date: formData.date,
+      time: formData.time
     }
 
+    const id = "AIM"+ new Date().getTime();
+    localStorage.setItem("bookid", id);
 
+    const visitor = {
+      bookid: id,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      trip: tripType,
+      pickup_location: formData.pickup,
+      drop_location: formData.drop,
+      date: formData.date,
+      time: formData.time,
+      dateend: formData.dateend,
+      timeend: formData.timeend,
+    }
 
+    const res = await axios.post("/api/visit", visitor);
 
+    console.log(res);
 
     const destinationService = new window.google.maps.DirectionsService();
-    const geocoder = new window.google.maps.Geocoder();
 
     const request = {
       origin: formData.from,
@@ -94,7 +117,7 @@ export default function Home() {
           console.log(result[0]);
           setFormData((prevData) => ({
             ...prevData,
-            [field === pickupRef.current ? 'pickup' : 'drop']: result[0].address_components.length === 6 ? result[0].address_components[1].short_name : result[0].address_components[1].short_name, // Update from or to field
+            [field === pickupRef.current ? 'pickup' : 'drop']: place.formatted_address,
             [field === pickupRef.current ? 'from' : 'to']: place.formatted_address
           }));
         }
