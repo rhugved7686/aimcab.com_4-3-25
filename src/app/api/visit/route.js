@@ -3,7 +3,7 @@ import Visitor from "../../../model/Queries";
 import { NextResponse } from "next/server";
 
 
-
+initializeDatabase();
 
 
 export const POST = async(req)=>{
@@ -16,6 +16,14 @@ export const POST = async(req)=>{
     } catch (error) {
         console.log(error);
         return NextResponse.json({message:"failed to store visitor data"});
+    }
+    finally {
+        try {
+            await sequelize.close();
+            console.log('Sequelize connection closed.');
+        } catch (error) {
+            console.error('Error closing Sequelize connection:', error);
+        }
     }
 }
 

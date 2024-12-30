@@ -258,7 +258,7 @@ export default function Home() {
 
               {/* Horizontal Scroll Container */}
               <div className="mt-8 overflow-x-auto flex space-x-8 pb-8">
-                {cars.map((car) => (
+                {cars.map((car, index) => (
                   car.price > 0 ?
                     <div key={car.id} className="card p-6 bg-white shadow-lg rounded-lg w-80">
                       <Image src={car.image} alt={car.name} width={320} height={240} loading='lazy' className="w-90 h-30 object-cover rounded-lg" /> {/* Updated to reduce image width */}

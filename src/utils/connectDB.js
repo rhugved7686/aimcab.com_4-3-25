@@ -6,7 +6,7 @@ const sequelize = new Sequelize("u364027494_aimcabbo_admin", "u364027494_aimcabb
   host: "193.203.184.167",
   dialectModule: mysql,
   pool:{
-    max: 10,
+    max: 100,
     min: 0,
     acquire: 30000,
     idle: 10000

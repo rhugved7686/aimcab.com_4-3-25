@@ -17,6 +17,14 @@ export const POST = async (req) => {
         console.error(error);
         return NextResponse.json({ message: "Error creating trip", error: error.message }, { status: 500 });
     }
+    finally {
+        try {
+            await sequelize.close();
+            console.log('Sequelize connection closed.');
+        } catch (error) {
+            console.error('Error closing Sequelize connection:', error);
+        }
+    }
 };
 
 

@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
-import sequelize from "../../../utils/connectDB";
+import sequelize, { initializeDatabase } from "../../../utils/connectDB";
 import axios from "axios";
 
 const google_key = "AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w";
+
+
+initializeDatabase();
 
 export const POST = async (req) => {
     try {
@@ -34,7 +37,7 @@ export const POST = async (req) => {
 
             const type = tripType === "One Way" ? "oneway_trip" : tripType === "Round" ? "round_trip" : "rental_trip";
 
-            const fetchDetails =async (tripType, locality1, locality2) => {
+            const fetchDetails = async (tripType, locality1, locality2) => {
 
                 if (!locality1 || !locality2 || !locality1.long_name || !locality2.long_name) {
                     return null;
@@ -60,7 +63,7 @@ export const POST = async (req) => {
             //     { optional_locality1, locality2 },
             //     { optional_locality1, optional_locality2 }
             //   ];
-        
+
             //   for (let { locality1, locality2 } of localityCombinations) {
             //     console.log(locality1, locality2);
             //     const result = await fetchDetails(tripType, locality1, locality2);
@@ -71,8 +74,8 @@ export const POST = async (req) => {
 
             // First query
             const query = tripType === "Rental"
-                ? `SELECT * FROM ${type} WHERE city LIKE "${locality1.long_name}"`
-                : `SELECT * FROM ${type} WHERE destination_city LIKE '${locality2.long_name}' AND source_city LIKE '${locality1.long_name}' LIMIT 1`;
+                ? `SELECT * FROM ${type} WHERE city = "${locality1.long_name}" and hours = ${hours}`
+                : `SELECT * FROM ${type} WHERE destination_city = '${locality2.long_name}' AND source_city = '${locality1.long_name}' LIMIT 1`;
 
             const data = await sequelize.query(query);
             if (data[0].length > 0) {
@@ -81,8 +84,8 @@ export const POST = async (req) => {
 
             // Second query
             const query2 = tripType === "Rental"
-                ? `SELECT * FROM ${type} WHERE city LIKE "${optional_locality2.long_name}"`
-                : `SELECT * FROM ${type} WHERE destination_city LIKE '${optional_locality2.long_name}' AND source_city LIKE '${locality1.long_name}' LIMIT 1`;
+                ? `SELECT * FROM ${type} WHERE city = "${optional_locality2.long_name}" and hours = ${hours}`
+                : `SELECT * FROM ${type} WHERE destination_city = '${optional_locality2.long_name}' AND source_city = '${locality1.long_name}' LIMIT 1`;
 
             const data2 = await sequelize.query(query2);
             if (data2[0].length > 0) {
@@ -90,20 +93,20 @@ export const POST = async (req) => {
             }
 
             // Third query
-            const query3 = `SELECT * FROM ${type} WHERE destination_city LIKE '${locality2.long_name}' AND source_city LIKE '${optional_locality1.long_name}' LIMIT 1`;
+            const query3 = `SELECT * FROM ${type} WHERE destination_city = '${locality2.long_name}' AND source_city = '${optional_locality1.long_name}' LIMIT 1`;
             const data3 = await sequelize.query(query3);
             if (data3[0].length > 0) {
                 return NextResponse.json({ message: "Data fetched successfully 3", data: data3[0][0] });
             }
 
             // Fourth query
-            const query4 = `SELECT * FROM ${type} WHERE destination_city LIKE '${optional_locality2.long_name}' AND source_city LIKE '${optional_locality1.long_name}' LIMIT 1`;
+            const query4 = `SELECT * FROM ${type} WHERE destination_city = '${optional_locality2.long_name}' AND source_city = '${optional_locality1.long_name}' LIMIT 1`;
             const data4 = await sequelize.query(query4);
             if (data4[0].length > 0) {
                 return NextResponse.json({ message: "Data fetched successfully 4", data: data4[0][0] });
             }
 
-            
+
             return NextResponse.json({ message: "Failed to fetch data" });
 
         } catch (error) {
@@ -115,6 +118,12 @@ export const POST = async (req) => {
         console.error("Error creating trip:", error.message);
         return NextResponse.json({ message: "Error creating trip", error: error.message }, { status: 500 });
     } finally {
-        
+
+        try {
+            await sequelize.close();
+            console.log('Sequelize connection closed.');
+        } catch (error) {
+            console.error('Error closing Sequelize connection:', error);
+        }
     }
 };
