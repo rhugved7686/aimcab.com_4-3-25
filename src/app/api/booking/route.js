@@ -9,7 +9,7 @@ export const POST = async (req) => {
     try {
         // Parse the request body and ensure it's a valid JSON payload
         const data = await req.json();  // Use req.json() to parse JSON request body in Next.js API routes
-        const id = "AIM"+ new Date().getTime();
+        console.log(data);
         const trip = await Trip.create({...data});
         
         return NextResponse.json({ message: "Trip created successfully", trip }); // Send a JSON response with a success message

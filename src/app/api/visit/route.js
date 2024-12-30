@@ -1,6 +1,9 @@
-import sequelize from "../../../utils/connectDB";
+import sequelize, { initializeDatabase } from "../../../utils/connectDB";
 import Visitor from "../../../model/Queries";
 import { NextResponse } from "next/server";
+
+
+
 
 
 export const POST = async(req)=>{

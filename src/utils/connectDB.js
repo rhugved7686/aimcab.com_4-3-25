@@ -5,11 +5,17 @@ const sequelize = new Sequelize("u364027494_aimcabbo_admin", "u364027494_aimcabb
   dialect: "mysql",
   host: "193.203.184.167",
   dialectModule: mysql,
+  pool:{
+    max: 10,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
   port: 3306
 })
 
 
-const initialized = false;
+let initialized = false;
 
 export const initializeDatabase = async () => {
   try {

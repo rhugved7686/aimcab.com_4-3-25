@@ -6,7 +6,7 @@ const google_key = "AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w";
 
 export const POST = async (req) => {
     try {
-        const { tripType, pickup, drop } = await req.json();
+        const { tripType, pickup, drop, hours } = await req.json();
 
         if (!pickup || !drop || !tripType) {
             return NextResponse.json({ message: "All fields are mandatory" }, { status: 400 });
@@ -36,12 +36,12 @@ export const POST = async (req) => {
 
             const fetchDetails =async (tripType, locality1, locality2) => {
 
-                if (!locality1.long_name || !locality2.long_name) {
+                if (!locality1 || !locality2 || !locality1.long_name || !locality2.long_name) {
                     return null;
                 }
 
                 const query = tripType === "Rental"
-                    ? `SELECT * FROM ${type} WHERE city LIKE "${locality1.long_name}"`
+                    ? `SELECT * FROM ${type} WHERE city = "${locality1.long_name}" and hours = ${hours}`
                     : `SELECT * FROM ${type} WHERE destination_city = '${locality2.long_name}' AND source_city = '${locality1.long_name}' LIMIT 1`;
 
                 const data = await sequelize.query(query);
@@ -53,57 +53,57 @@ export const POST = async (req) => {
                 return null;
             }
 
-
-            const localityCombinations = [
-                { locality1, locality2 },
-                { locality1, optional_locality2 },
-                { optional_locality1, locality2 },
-                { optional_locality1, optional_locality2 }
-              ];
+            // console.log(locality1, locality2, optional_locality1, optional_locality2);
+            // const localityCombinations = [
+            //     { locality1, locality2 },
+            //     { locality1, optional_locality2 },
+            //     { optional_locality1, locality2 },
+            //     { optional_locality1, optional_locality2 }
+            //   ];
         
-              for (let { locality1, locality2 } of localityCombinations) {
-                const result = await fetchDetails(tripType, locality1, locality2);
-                if (result) {
-                  return NextResponse.json(result);
-                }
-              }
+            //   for (let { locality1, locality2 } of localityCombinations) {
+            //     console.log(locality1, locality2);
+            //     const result = await fetchDetails(tripType, locality1, locality2);
+            //     if (result) {
+            //       return NextResponse.json(result);
+            //     }
+            //   }
 
-            // // First query
-            // const query = tripType === "Rental"
-            //     ? `SELECT * FROM ${type} WHERE city LIKE "${locality1.long_name}"`
-            //     : `SELECT * FROM ${type} WHERE destination_city LIKE '${locality2.long_name}' AND source_city LIKE '${locality1.long_name}' LIMIT 1`;
+            // First query
+            const query = tripType === "Rental"
+                ? `SELECT * FROM ${type} WHERE city LIKE "${locality1.long_name}"`
+                : `SELECT * FROM ${type} WHERE destination_city LIKE '${locality2.long_name}' AND source_city LIKE '${locality1.long_name}' LIMIT 1`;
 
-            // const data = await sequelize.query(query);
-            // if (data[0].length > 0) {
-            //     return NextResponse.json({ message: "Data fetched successfully 1", data: data[0][0] });
-            // }
+            const data = await sequelize.query(query);
+            if (data[0].length > 0) {
+                return NextResponse.json({ message: "Data fetched successfully 1", data: data[0][0] });
+            }
 
-            // // Second query
-            // const query2 = tripType === "Rental"
-            //     ? `SELECT * FROM ${type} WHERE city LIKE "${optional_locality2.long_name}"`
-            //     : `SELECT * FROM ${type} WHERE destination_city LIKE '${optional_locality2.long_name}' AND source_city LIKE '${locality1.long_name}' LIMIT 1`;
+            // Second query
+            const query2 = tripType === "Rental"
+                ? `SELECT * FROM ${type} WHERE city LIKE "${optional_locality2.long_name}"`
+                : `SELECT * FROM ${type} WHERE destination_city LIKE '${optional_locality2.long_name}' AND source_city LIKE '${locality1.long_name}' LIMIT 1`;
 
-            // const data2 = await sequelize.query(query2);
-            // if (data2[0].length > 0) {
-            //     return NextResponse.json({ message: "Data fetched successfully 2", data: data2[0][0] });
-            // }
+            const data2 = await sequelize.query(query2);
+            if (data2[0].length > 0) {
+                return NextResponse.json({ message: "Data fetched successfully 2", data: data2[0][0] });
+            }
 
-            // // Third query
-            // const query3 = `SELECT * FROM ${type} WHERE destination_city LIKE '${locality2.long_name}' AND source_city LIKE '${optional_locality1.long_name}' LIMIT 1`;
-            // const data3 = await sequelize.query(query3);
-            // if (data3[0].length > 0) {
-            //     return NextResponse.json({ message: "Data fetched successfully 3", data: data3[0][0] });
-            // }
+            // Third query
+            const query3 = `SELECT * FROM ${type} WHERE destination_city LIKE '${locality2.long_name}' AND source_city LIKE '${optional_locality1.long_name}' LIMIT 1`;
+            const data3 = await sequelize.query(query3);
+            if (data3[0].length > 0) {
+                return NextResponse.json({ message: "Data fetched successfully 3", data: data3[0][0] });
+            }
 
-            // // Fourth query
-            // const query4 = `SELECT * FROM ${type} WHERE destination_city LIKE '${optional_locality2.long_name}' AND source_city LIKE '${optional_locality1.long_name}' LIMIT 1`;
-            // const data4 = await sequelize.query(query4);
-            // if (data4[0].length > 0) {
-            //     return NextResponse.json({ message: "Data fetched successfully 4", data: data4[0][0] });
-            // }
+            // Fourth query
+            const query4 = `SELECT * FROM ${type} WHERE destination_city LIKE '${optional_locality2.long_name}' AND source_city LIKE '${optional_locality1.long_name}' LIMIT 1`;
+            const data4 = await sequelize.query(query4);
+            if (data4[0].length > 0) {
+                return NextResponse.json({ message: "Data fetched successfully 4", data: data4[0][0] });
+            }
 
             
-
             return NextResponse.json({ message: "Failed to fetch data" });
 
         } catch (error) {
@@ -114,5 +114,7 @@ export const POST = async (req) => {
     } catch (error) {
         console.error("Error creating trip:", error.message);
         return NextResponse.json({ message: "Error creating trip", error: error.message }, { status: 500 });
+    } finally {
+        
     }
 };
