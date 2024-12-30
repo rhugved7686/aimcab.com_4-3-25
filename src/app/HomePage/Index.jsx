@@ -46,24 +46,9 @@ export default function Home() {
     e.preventDefault();
 
     const diff = new Date(formData.dateend).getTime() - new Date(formData.date).getTime();
-    const day = diff / (1000* 3600 * 24);
-    console.log(day);
-
-    const body = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      user_pickup: formData.pickup,
-      user_drop: formData.drop,
-      user_trip_type: tripType,
-      pickup_location: formData.pickup,
-      drop_location: formData.drop,
-      days: (day+1),
-      date: formData.date,
-      time: formData.time
-    }
-
-    const id = "AIM"+ new Date().getTime();
+    const day = diff / (1000 * 3600 * 24);
+    
+    const id = "AIM" + new Date().getTime();
     localStorage.setItem("bookid", id);
 
     const visitor = {
@@ -78,12 +63,11 @@ export default function Home() {
       time: formData.time,
       dateend: formData.dateend,
       timeend: formData.timeend,
+      oneway_distance: "",
+      round_distance: "",
     }
 
-    const res = await axios.post("/api/visit", visitor);
-
-    console.log(res);
-
+    // Initialize DirectionsService
     const destinationService = new window.google.maps.DirectionsService();
 
     const request = {
@@ -92,16 +76,31 @@ export default function Home() {
       travelMode: window.google.maps.TravelMode.DRIVING, // Change this based on your travel mode
     };
 
+    // Use promise to handle asynchronous Google Maps API call
+    const calculateDistance = new Promise((resolve, reject) => {
+      destinationService.route(request, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          if (result && result.routes[0].legs[0].distance) {
+            const distance = result.routes[0].legs[0].distance.value / 1000;
+            tripType == "One Way" ? visitor.oneway_distance = distance : tripType == "Round" ? visitor.round_distance = distance : "";
+          }
+          resolve();  // Resolve the promise after the distance is calculated
+        } else {
+          reject(new Error('Failed to get route'));
+        }
+      });
+    });
 
-    destinationService.route(request, (result, status) => {
-      console.log(result);
-      if (result.routes[0].legs[0]) {
-        dispatch(addTripDetails({ ...body, distance: (result.routes[0].legs[0].distance.value / 1000) }));
-      }
-
-    })
-
-    router.push('/Booking');
+    // Perform the route calculation and post the visitor data in parallel
+    try {
+      await Promise.all([calculateDistance, axios.post("/api/visit", visitor)]);
+      
+      // Store the trip data and navigate after both actions are complete
+      localStorage.setItem("trip", JSON.stringify(visitor));
+      router.push('/Booking');
+    } catch (error) {
+      console.error("Error during route calculation or API post:", error);
+    }
   };
 
 
@@ -113,12 +112,11 @@ export default function Home() {
       const geocoder = new window.google.maps.Geocoder();
 
       geocoder.geocode({ address: place.formatted_address }, (result, status) => {
-        if (result.length > 0) {
-          console.log(result[0]);
+        if (result && result.length > 0) {
           setFormData((prevData) => ({
             ...prevData,
             [field === pickupRef.current ? 'pickup' : 'drop']: place.formatted_address,
-            [field === pickupRef.current ? 'from' : 'to']: place.formatted_address
+            [field === pickupRef.current ? 'from' : 'to']: place.formatted_address,
           }));
         }
       })

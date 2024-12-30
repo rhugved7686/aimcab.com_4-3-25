@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/Booking/page.jsx"
-  ],
+, "src/app/HomePage/Index.jsx"  ],
   "exclude": [
     "node_modules"
   ]

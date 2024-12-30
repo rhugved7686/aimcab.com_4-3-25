@@ -7,9 +7,7 @@ export const POST = async(req)=>{
     try {
 
         const data =await req.json();
-        console.log(data);
         const visit = Visitor.create(data);
-
         return  NextResponse.json({message:"Visited data create successfully", data: visit});
         
     } catch (error) {
