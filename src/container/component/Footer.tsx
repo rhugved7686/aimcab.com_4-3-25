@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Address Section */}
-          <div>
+          {/* <div>
             <h5 className="text-white text-xl flex items-center">
               <img
                 className="w-8 h-8 mr-2"
@@ -32,10 +32,10 @@ export default function Footer() {
               />
               +91 2041295329
             </p>
-          </div>
+          </div> */}
 
           {/* Services Section */}
-          <div>
+          {/* <div>
             <h5 className="text-white text-xl">SERVICES</h5>
             <ul className="mt-2">
               <li>→ <a href="/LuxuryCarsBooking" className="text-yellow-400 hover:text-white">Luxury Cars</a></li>
@@ -45,10 +45,10 @@ export default function Footer() {
               <li>→ <a href="tel:9130030054" className="text-yellow-400 hover:text-white">Out Station Cab</a></li>
               <li>→ <a href="tel:9130030054" className="text-yellow-400 hover:text-white">Airport Transport</a></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* States Section */}
-          <div>
+          {/* <div>
             <h5 className="text-white text-xl">STATES</h5>
             <ul className="mt-2">
               <li>→ <a href="https://www.aimcabbooking.com/Maharashtra" className="text-yellow-400 hover:text-white">Maharashtra (current)</a></li>
@@ -58,10 +58,10 @@ export default function Footer() {
               <li>→ <a href="https://www.aimcabbooking.com/Karnataka" className="text-yellow-400 hover:text-white">Karnataka</a></li>
               <li>→ <a href="https://www.aimcabbooking.com/Rajasthan" className="text-yellow-400 hover:text-white">Rajasthan</a></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* About Us Section */}
-          <div>
+          {/* <div>
             <h5 className="text-white text-xl">ABOUT US</h5>
             <p className="mt-2">
               <b>
@@ -80,12 +80,12 @@ export default function Footer() {
                 SUBSCRIBE
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
 
       {/* Divider */}
-      <hr className="border-gray-500 my-8" />
+      {/* <hr className="border-gray-500 my-8" /> */}
 
       {/* Popular Cities Section */}
       <div className="container mx-auto px-4">
@@ -94,34 +94,6 @@ export default function Footer() {
           <div className="flex flex-wrap justify-center mt-2">
             <a href="/Pune" className="text-yellow-400 hover:text-white mx-2">Pune</a>
             <a href="/Mumbai/" className="text-yellow-400 hover:text-white mx-2">Mumbai</a>
-            <a href="https://www.aimcabbooking.com/Goa/" className="text-yellow-400 hover:text-white mx-2">Goa City</a>
-            <a href="https://www.aimcabbooking.com/mahabaleshwar/" className="text-yellow-400 hover:text-white mx-2">Mahabaleshwar</a>
-            <a href="https://www.aimcabbooking.com/lonavala" className="text-yellow-400 hover:text-white mx-2">Lonavala</a>
-            <a href="https://www.aimcabbooking.com/panchgani" className="text-yellow-400 hover:text-white mx-2">Panchgani</a>
-            <a href="https://www.aimcabbooking.com/solapur" className="text-yellow-400 hover:text-white mx-2">Solapur</a>
-            <a href="https://www.aimcabbooking.com/kolhapur" className="text-yellow-400 hover:text-white mx-2">Kolhapur</a>
-            <a href="https://www.aimcabbooking.com/sangamner" className="text-yellow-400 hover:text-white mx-2">Sangamner</a>
-            <a href="https://www.aimcabbooking.com/alibag" className="text-yellow-400 hover:text-white mx-2">Alibag</a>
-            <a href="https://www.aimcabbooking.com/shirdi" className="text-yellow-400 hover:text-white mx-2">Shirdi</a>
-            <a href="https://www.aimcabbooking.com/nashik" className="text-yellow-400 hover:text-white mx-2">Nashik</a>
-            <a href="https://www.aimcabbooking.com/nagpur" className="text-yellow-400 hover:text-white mx-2">Nagpur</a>
-            <a href="https://www.aimcabbooking.com/karad" className="text-yellow-400 hover:text-white mx-2">Karad</a>
-            <a href="https://www.aimcabbooking.com/sangli" className="text-yellow-400 hover:text-white mx-2">Sangli</a>
-            <a href="https://www.aimcabbooking.com/satara" className="text-yellow-400 hover:text-white mx-2">Satara</a>
-            <a href="https://www.aimcabbooking.com/miraj" className="text-yellow-400 hover:text-white mx-2">Miraj</a>
-            <a href="https://www.aimcabbooking.com/jalna" className="text-yellow-400 hover:text-white mx-2">Jalna</a>
-            <a href="https://www.aimcabbooking.com/latur" className="text-yellow-400 hover:text-white mx-2">Latur</a>
-            <a href="https://www.aimcabbooking.com/shrirampur" className="text-yellow-400 hover:text-white mx-2">Shrirampur</a>
-            <a href="https://www.aimcabbooking.com/mapusa" className="text-yellow-400 hover:text-white mx-2">Mapusa</a>
-            <a href="https://www.aimcabbooking.com/panaji" className="text-yellow-400 hover:text-white mx-2">Panaji</a>
-            <a href="https://www.aimcabbooking.com/surat" className="text-yellow-400 hover:text-white mx-2">Surat</a>
-            <a href="https://www.aimcabbooking.com/ahmedabad" className="text-yellow-400 hover:text-white mx-2">Ahmedabad</a>
-            <a href="https://www.aimcabbooking.com/ahmednagar" className="text-yellow-400 hover:text-white mx-2">Ahmednagar</a>
-            <a href="https://www.aimcabbooking.com/aurangabad" className="text-yellow-400 hover:text-white mx-2">Aurangabad</a>
-            <a href="https://www.aimcabbooking.com/vadodra" className="text-yellow-400 hover:text-white mx-2">Vadodra</a>
-            <a href="https://www.aimcabbooking.com/panchgani" className="text-yellow-400 hover:text-white mx-2">Belgaum(Belagavi)</a>
-            <a href="https://www.aimcabbooking.com/panchgani" className="text-yellow-400 hover:text-white mx-2">Banglore(Bengaluru)</a>
-            <a href="https://www.aimcabbooking.com/panchgani" className="text-yellow-400 hover:text-white mx-2">Vijayapura(Bijapur)</a>
 
 
 
@@ -139,15 +111,15 @@ export default function Footer() {
       <div className="container mx-auto px-4 text-center text-white">
         <b>QUICK LINKS:</b>
         <div className="mt-2">
-          <a href="https://aimcabbooking.com/" className="text-yellow-400 hover:text-white mx-2">HOME</a>
-          <a href="https://aimcabbooking.com/" className="text-yellow-400 hover:text-white mx-2">UPDATES</a>
-          <a href="https://aimcabbooking.com/#about" className="text-yellow-400 hover:text-white mx-2">ABOUT</a>
-          <a href="https://aimcabbooking.com/#service" className="text-yellow-400 hover:text-white mx-2">SERVICES</a>
-          <a href="https://aimcabbooking.com/#contact" className="text-yellow-400 hover:text-white mx-2">CONTACT US</a>
-          <a href="https://aimcabbooking.com/careers.php" className="text-yellow-400 hover:text-white mx-2">CAREER</a>
-          <a href="https://aimcabbooking.com/faq.php" className="text-yellow-400 hover:text-white mx-2">FAQ's</a>
-          <a href="https://aimcabbooking.com/privacy-policy.php" className="text-yellow-400 hover:text-white mx-2">PRIVACY POLICY</a>
-          <a href="https://aimcabbooking.com/terms-conditions.php" className="text-yellow-400 hover:text-white mx-2">TERMS & CONDITIONS</a>
+          <a href="/" className="text-yellow-400 hover:text-white mx-2">HOME</a>
+          <a href="/" className="text-yellow-400 hover:text-white mx-2">UPDATES</a>
+          <a href="/#about" className="text-yellow-400 hover:text-white mx-2">ABOUT</a>
+          <a href="/#service" className="text-yellow-400 hover:text-white mx-2">SERVICES</a>
+          <a href="/#contact" className="text-yellow-400 hover:text-white mx-2">CONTACT US</a>
+          <a href="/career" className="text-yellow-400 hover:text-white mx-2">CAREER</a>
+          <a href="/FAQ" className="text-yellow-400 hover:text-white mx-2">FAQ's</a>
+          <a href="/PrivacyPolicy" className="text-yellow-400 hover:text-white mx-2">PRIVACY POLICY</a>
+          <a href="/TermsConditions" className="text-yellow-400 hover:text-white mx-2">TERMS & CONDITIONS</a>
         </div>
       </div>
 

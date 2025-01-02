@@ -31,7 +31,7 @@ export default function Navbar() {
             <a href="#about" className="text-white">About</a>
             <a href="#service" className="text-white">Services</a>
             <a href="#contact" className="text-white">Contact</a>
-            <a href="/user" className="text-white">
+            <a href="/User" className="text-white">
               <img
                 src="images/admin.jpg"
                 alt="User Avatar"
