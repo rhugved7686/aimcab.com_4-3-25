@@ -120,7 +120,7 @@ export default function Contact() {
                   name="message"
                   id="message"
                   required
-                  rows="4"
+                  rows={4}
                   className="mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300"
                   placeholder="Enter your message"
                 ></textarea>

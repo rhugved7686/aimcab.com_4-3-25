@@ -135,303 +135,277 @@ export default function Home() {
     <div className="flex flex-col items-center">
 
       {/* Booking Form and Promo Section */}
-      <div className="flex justify-between w-full max-w-screen-xl p-5 space-x-4">
-        {/* Left side: Carousel/Promo Section */}
-        <div className="w-2/3">
-          <div id="carouselExampleIndicators" className="carousel slide">
-            <ol className="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            </ol>
-            <div className="carousel-inner relative overflow-hidden">
-  <div className="carousel-item active">
-    <div className="bg-cover bg-fixed bg-center text-center min-h-[100vh] py-16 px-8" style={{ backgroundImage: 'url("/images/car.jpg")' }}>
-
-      <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay to improve text visibility */}
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate__animated animate__fadeIn animate__delay-1s">
-        15% off on One Way & Round Trips
-      </h2>
-
-      <div className="flex justify-center items-center gap-4">
-        <span className="border border-white px-6 py-3 text-white bg-black font-semibold text-lg rounded-md animate__animated animate__fadeInUp animate__delay-1s">
-          AIMNEW15
-        </span>
-
-        <button
-          className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-md transform transition duration-300 ease-in-out hover:bg-yellow-500 animate__animated animate__fadeInUp animate__delay-2s"
-          onClick={() => navigator.clipboard.writeText("AIMNEW15")}
-        >
-          Copy
-        </button>
+      <div className="relative w-full max-w-screen-xl flex p-0 m-0">
+  {/* Left side: Carousel/Promo Section */}
+  <div className="w-1/2 lg:w-1/2">  {/* Adjusted to 1/2 for full screen on smaller screens */}
+    <div id="carouselExampleIndicators" className="carousel slide">
+      <ol className="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      </ol>
+      <div className="carousel-inner relative overflow-hidden">
+        <div className="carousel-item active">
+          <div
+            className="bg-cover bg-fixed bg-center text-center min-h-[100vh] py-16 px-8"
+            style={{ backgroundImage: 'url("/images/car.jpg")' }}
+          >
+            <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay to improve text visibility */}
+            <br /><br /><br /><br /><br /><br />
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate__animated animate__fadeIn animate__delay-1s">
+              15% off on One Way & Round Trips
+            </h2>
+            <div className="flex justify-center items-center gap-4">
+              <span className="border border-white px-6 py-3 text-white bg-black font-semibold text-lg rounded-md animate__animated animate__fadeInUp animate__delay-1s">
+                AIMNEW15
+              </span>
+              <button
+                className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-md transform transition duration-300 ease-in-out hover:bg-yellow-500 animate__animated animate__fadeInUp animate__delay-2s"
+                onClick={() => navigator.clipboard.writeText("AIMNEW15")}
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  {/* Right side: Booking Form */}
+  <div
+    className="w-1/2 lg:w-1/2 p-4 rounded-lg backdrop-blur-lg bg-white/30 relative"
+    style={{
+      backgroundImage: 'url("/images/car.jpg")', 
+      backgroundSize: 'cover', 
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed', // Ensures the background stays fixed when scrolling
+      minHeight: '100vh' // Ensures the background covers the full height
+    }}
+  >
+    <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay for booking form */}
+    
+    <LoadScript googleMapsApiKey="AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w" libraries={['places']}>
+      <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+        <h2 className="text-center text-2xl font-semibold">BOOK A CAB NOW</h2>
+
+        {/* Trip Type Selection */}
+        <div className="flex space-x-4 mb-4">
+          <div className="w-1/3">
+            <h4 className="text-left text-sm">Trip Type</h4>
+            <select
+              className="w-full p-2 bg-yellow-300"
+              name="trip"
+              value={tripType}
+              onChange={handleSelectChange}
+              required
+            >
+              <option value="One Way">One Way Trip</option>
+              <option value="Round">Round Trip</option>
+              <option value="Rental">Rental</option>
+            </select>
+          </div>
+        </div>
+
+        {/* One Way Trip Inputs */}
+        {tripType === 'One Way' && (
+          <div className="flex space-x-4 mb-4">
+            <div className="w-1/2">
+              <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
+                <input
+                  id='pickup-location'
+                  className="w-full p-2 mb-2"
+                  name="from"
+                  type="text"
+                  placeholder="PickUp Location"
+                  value={formData.from}
+                  onChange={handleChange}
+                  required
+                />
+              </Autocomplete>
+            </div>
+            <div className="w-1/2">
+              <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
+                <input
+                  id="drop-location"
+                  className="w-full p-2 mb-2"
+                  name="to"
+                  type="text"
+                  placeholder="Drop Location"
+                  value={formData.to}
+                  onChange={handleChange}
+                  required
+                />
+              </Autocomplete>
+            </div>
+          </div>
+        )}
+
+        {/* Round Trip Inputs */}
+        {tripType === 'Round' && (
+          <div className="flex space-x-4 mb-4">
+            <div className="w-1/2">
+              {/* Pickup and Drop Locations for Round Trip */}
+              <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
+                <input
+                  id='pickup-location'
+                  className="w-full p-2 mb-2"
+                  name="from"
+                  type="text"
+                  placeholder="PickUp Location"
+                  value={formData.from}
+                  onChange={handleChange}
+                  required
+                />
+              </Autocomplete>
+            </div>
+            <div className="w-1/2">
+              <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
+                <input
+                  id="drop-location"
+                  className="w-full p-2 mb-2"
+                  name="to"
+                  type="text"
+                  placeholder="Drop Location"
+                  value={formData.to}
+                  onChange={handleChange}
+                  required
+                />
+              </Autocomplete>
+            </div>
+          </div>
+        )}
+
+        {/* Date and Time Inputs for Both Trip Types */}
+        <div className="flex space-x-4 mb-4">
+          <div className="w-1/2">
+            <h5 className="text-left text-sm">Choose Date</h5>
+            <input
+              className="w-full p-2 mb-2"
+              name="date"
+              type="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="w-1/2">
+            <h5 className="text-left text-sm">Choose Time</h5>
+            <input
+              className="w-full p-2 mb-2"
+              name="time"
+              type="time"
+              value={formData.time}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        {/* Return Date and Time (For Round Trip) */}
+        {tripType === 'Round' && (
+          <div className="flex space-x-4 mb-4">
+            <div className="w-1/2">
+              <h5 className="text-left text-sm">Return Date</h5>
+              <input
+                className="w-full p-2 mb-2"
+                name="dateend"
+                type="date"
+                value={formData.dateend}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="w-1/2">
+              <h5 className="text-left text-sm">Return Time</h5>
+              <input
+                className="w-full p-2 mb-2"
+                name="timeend"
+                type="time"
+                value={formData.timeend}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Rental Package Selection */}
+        {tripType === 'Rental' && (
+          <div className="flex space-x-4 mb-4">
+            <div className="w-1/2">
+              <h5 className="text-left text-sm">Choose Package</h5>
+              <select
+                className="w-full p-2 bg-yellow-300"
+                name="selectPackage"
+                value={formData.selectPackage}
+                onChange={handleChange}
+              >
+                <option value="4">4Hrs 40Kms</option>
+                <option value="6">6Hrs 60Kms</option>
+                <option value="8">8Hrs 80Kms</option>
+              </select>
+            </div>
+          </div>
+        )}
+
+        {/* Personal Details Inputs */}
+        <div className="flex space-x-4 mb-4">
+          <div className="w-1/3">
+            <input
+              className="w-full p-2 mb-2"
+              name="name"
+              type="text"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="w-1/3">
+            <input
+              className="w-full p-2 mb-2"
+              name="phone"
+              type="tel"
+              placeholder="Your Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="w-1/3">
+            <input
+              className="w-full p-2 mb-2"
+              name="email"
+              type="email"
+              placeholder="Your Email ID"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          className="relative px-6 py-3 text-white bg-yellow-300 rounded-lg disabled:bg-blue-300 disabled:cursor-not-allowed"
+          disabled={loading} // Disable button when loading
+        >
+          {loading ? (
+            <div role="status">
+              <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+              </svg>
+              <span>Loading...</span>
+            </div>
+          ) : (
+            <span>Book Now</span> // Text when not loading
+          )}
+        </button>
+      </form>
+    </LoadScript>
   </div>
 </div>
 
 
-
-          </div>
-        </div>
-
-        {/* Right side: Booking Form */}
-        <div className="w-1/3 p-4 bg-gray-100 rounded-lg" id="booking-form">
-          <LoadScript googleMapsApiKey="AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w" libraries={['places']}>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <h2 className="text-center text-2xl font-semibold">BOOK A CAB NOW</h2>
-
-              {/* Trip Type Selection */}
-              <div className="space-y-2">
-                <h4 className="text-left text-sm">Trip Type</h4>
-                <select
-                  className="w-full p-2 bg-yellow-300"
-                  name="trip"
-                  value={tripType}
-                  onChange={handleSelectChange}
-                  required
-                >
-                  <option value="One Way">One Way Trip</option>
-                  <option value="Round">Round Trip</option>
-                  <option value="Rental">Rental</option>
-                </select>
-              </div>
-
-              {/* One Way Trip Inputs */}
-              {tripType === 'One Way' && (
-                <div>
-                  <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
-                    <input
-                      id='pickup-location'
-                      className="w-full p-2 mb-2"
-                      name="from"
-                      type="text"
-                      placeholder="PickUp Location"
-                      value={formData.from}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
-                    <input
-                      id="drop-location"
-                      className="w-full p-2 mb-2"
-                      name="to"
-                      type="text"
-                      placeholder="Drop Location"
-                      value={formData.to}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="time"
-                    type="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              )}
-
-              {/* Round Trip Inputs */}
-              {tripType === 'Round' && (
-                <div>
-                  {/* Pickup and Drop Locations for Round Trip */}
-                  <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
-                    <input
-                      id='pickup-location'
-                      className="w-full p-2 mb-2"
-                      name="from"
-                      type="text"
-                      placeholder="PickUp Location"
-                      value={formData.from}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
-                    <input
-                      id="drop-location"
-                      className="w-full p-2 mb-2"
-                      name="to"
-                      type="text"
-                      placeholder="Drop Location"
-                      value={formData.to}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-
-                  {/* Choose Date and Time for Round Trip */}
-                  <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="time"
-                    type="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  {/* Return Date and Time */}
-                  <h5 className="text-left text-sm mt-4">Return Date and Time</h5>
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="dateend"
-                    type="date"
-                    value={formData.dateend}
-                    onChange={handleChange}
-                  />
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="timeend"
-                    type="time"
-                    value={formData.timeend}
-                    onChange={handleChange}
-                  />
-                </div>
-              )}
-
-              {/* Rental Package Selection */}
-              {tripType === 'Rental' && (
-                <div>
-                  {/* Pickup and Drop Locations for Round Trip */}
-                  <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
-                    <input
-                      id='pickup-location'
-                      className="w-full p-2 mb-2"
-                      name="from"
-                      type="text"
-                      placeholder="PickUp Location"
-                      value={formData.from}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
-                    <input
-                      id="drop-location"
-                      className="w-full p-2 mb-2"
-                      name="to"
-                      type="text"
-                      placeholder="Drop Location"
-                      value={formData.to}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Autocomplete>
-                  {/* Choose Date and Time for Round Trip */}
-                  <h5 className="text-left text-sm mt-4">Choose Date and Time</h5>
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                  <input
-                    className="w-1/2 p-2 mb-2"
-                    name="time"
-                    type="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                  />
-                  <h5 className="text-left text-sm">Choose Package</h5>
-                  <select
-                    className="w-full p-2 bg-yellow-300"
-                    name="selectPackage"
-                    value={formData.selectPackage}
-                    onChange={handleChange}
-                  >
-                    <option value="4">4Hrs 40Kms</option>
-                    <option value="6">6Hrs 60Kms</option>
-                    <option value="8">8Hrs 80Kms</option>
-                  </select>
-                </div>
-              )}
-
-              {/* Personal Details Inputs */}
-              <div>
-                <input
-                  className="w-full p-2 mb-2"
-                  name="name"
-                  type="text"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  className="w-full p-2 mb-2"
-                  name="phone"
-                  type="tel"
-                  placeholder="Your Phone Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  className="w-full p-2 mb-2"
-                  name="email"
-                  type="email"
-                  placeholder="Your Email ID"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-
-
-              <button
-                className="relative px-6 py-3 text-white bg-yellow-300 rounded-lg disabled:bg-blue-300 disabled:cursor-not-allowed"
-                disabled={loading} // Disable button when loading
-              >
-                {loading ? (
-                  // Spinner shown when loading
-                  <div role="status">
-                    <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                      <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
-                    </svg>
-                    <span>Loading...</span>
-                  </div>
-                ) : (
-
-                  <span>Book Now</span> // Text when not loading
-                )}
-              </button>
-
-
-            </form>
-          </LoadScript>
-        </div>
-      </div>
 
 
 
@@ -443,7 +417,7 @@ export default function Home() {
   className="about_section layout_padding py-16 bg-cover bg-center" 
   id="about" 
   style={{ 
-    backgroundImage: "url('/images/green.jpg')", 
+    backgroundImage: "url('/images/t.png')", 
     backgroundAttachment: 'fixed' 
   }}
 >
@@ -476,27 +450,33 @@ export default function Home() {
 </div>
 
 
+
       {/* Right Column - Additional Services and Benefits */}
       <div className="lg:w-6/12 md:w-6/12 mb-8 animate__animated animate__fadeInRight flex justify-center">
-        <div className="info-box bg-yellow-200 p-8 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 w-full max-w-md">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Why Choose Aimcab?</h3>
-          <ul className="list-disc list-inside text-gray-700 mb-6">
-            <li className="mb-2">Affordable rates with no hidden fees.</li>
-            <li className="mb-2">Multiple vehicle options for every need: sedans, SUVs, luxury cars.</li>
-            <li className="mb-2">24/7 customer support to ensure your journey is hassle-free.</li>
-            <li className="mb-2">Easy and fast online booking with instant confirmations.</li>
-            <li className="mb-2">A wide network of experienced, professional drivers.</li>
-            <li className="mb-2">Well-maintained cars that prioritize your safety and comfort.</li>
-            <li className="mb-2">Track your ride in real-time with our intuitive mobile app.</li>
-          </ul>
-          <a
-            href="/#service"
-            className="inline-block bg-yellow-600 text-white px-6 py-2 rounded-md text-lg font-semibold transform hover:scale-110 transition-all duration-300"
-          >
-            Explore More
-          </a>
-        </div>
-      </div>
+  <div className="info-box bg-yellow-200 p-8 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 w-full max-w-md">
+    <h3 className="text-2xl font-semibold text-gray-800 mb-6">Why Choose Aimcab?</h3>
+    <ul className="list-disc list-inside text-gray-700 mb-6">
+      <li className="mb-2">Affordable rates with no hidden fees.</li>
+      <li className="mb-2">Multiple vehicle options for every need: sedans, SUVs, luxury cars.</li>
+      <li className="mb-2">24/7 customer support to ensure your journey is hassle-free.</li>
+      <li className="mb-2">Easy and fast online booking with instant confirmations.</li>
+      <li className="mb-2">A wide network of experienced, professional drivers.</li>
+      <li className="mb-2">Well-maintained cars that prioritize your safety and comfort.</li>
+      <li className="mb-2">Track your ride in real-time with our intuitive mobile app.</li>
+    </ul>
+
+    {/* Center the Explore More button */}
+    <div className="flex justify-center mt-6">
+      <a
+        href="/#service"
+        className="inline-block bg-yellow-600 text-white px-6 py-2 rounded-md text-lg font-semibold transform hover:scale-110 transition-all duration-300"
+      >
+        Explore More
+      </a>
+    </div>
+  </div>
+</div>
+
 
     </div>
   </div>
@@ -670,7 +650,6 @@ export default function Home() {
 </section>
 
 
-
       {/* Ready To Experience */}
       <section className="cta-section bg-gradient-to-r bg-yellow-500">
   <div className="max-w-8xl mx-auto text-center mb-12"> {/* Increased width here */}
@@ -695,17 +674,18 @@ export default function Home() {
     </div>
     {/* Testimonial Box */}
     <div className="testimonial-box relative bg-[url('/images/jpeg-logo.jpg')] bg-cover bg-center py-14 px-6 text-center rounded-lg shadow-2xl mb-12 animate__animated animate__fadeInUp animate__delay-2.5s">
-      {/* Overlay for blur and greyish effect */}
-      <div className="absolute inset-0 bg-black opacity-40 blur-sm"></div>
-  
-      <h3 className="text-2xl font-semibold text-black mb-4">
-        What Our Customers Say
-      </h3>
-      <p className="text-black text-lg italic mb-6">
-        "Aimcab made my travel experience so smooth and stress-free. The driver was friendly, and the car was spotless. Highly recommend!"
-      </p>
-      <p className="text-black text-sm">- Sarah J., Happy Traveler</p>
-    </div>
+  {/* Overlay for blur and greyish effect */}
+  <div className="absolute inset-0 bg-black opacity-60 blur-sm"></div>
+
+  <h3 className="text-3xl font-bold text-black mb-4">
+    What Our Customers Say
+  </h3>
+  <p className="text-black text-lg italic mb-6">
+    "Aimcab made my travel experience so smooth and stress-free. The driver was friendly, and the car was spotless. Highly recommend!"
+  </p>
+  <p className="text-black text-sm">- Sarah J., Happy Traveler</p>
+</div>
+
 
     {/* Contact Us Section */}
     <div className="text-center animate__animated animate__fadeInUp animate__delay-3s">
