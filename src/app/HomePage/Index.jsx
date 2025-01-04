@@ -145,9 +145,10 @@ export default function Home() {
             </ol>
             <div className="carousel-inner relative overflow-hidden">
   <div className="carousel-item active">
-  <div className="bg-cover bg-fixed bg-center text-center min-h-[80vh] py-16 px-8" style={{ backgroundImage: 'url("/images/s.png")' }}>
+    <div className="bg-cover bg-fixed bg-center text-center min-h-[100vh] py-16 px-8" style={{ backgroundImage: 'url("/images/car.jpg")' }}>
 
       <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay to improve text visibility */}
+      <br></br>
       <br></br>
       <br></br>
       <br></br>
@@ -172,6 +173,7 @@ export default function Home() {
     </div>
   </div>
 </div>
+
 
 
           </div>
@@ -437,43 +439,65 @@ export default function Home() {
       <br></br>
 
       {/* About Section */}
-      <section className="about_section layout_padding py-16 bg-gradient-to-r from-yellow-400 to-yellow-600" id="about">
+      <section 
+  className="about_section layout_padding py-16 bg-cover bg-center" 
+  id="about" 
+  style={{ 
+    backgroundImage: "url('/images/green.jpg')", 
+    backgroundAttachment: 'fixed' 
+  }}
+>
   <div className="container-fluid px-6 md:px-12">
-    <div className="flex flex-wrap">
-      
+    <div className="flex flex-wrap gap-8 justify-between items-center">
+
       {/* Left Column - About Details */}
-      <div className="lg:w-5/12 md:w-5/12 lg:ml-8 md:ml-8 mb-8 fade-in-left">
-        <div className="detail-box bg-white p-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">About AIMCAB</h2>
-          <p className="text-justify text-gray-700 mb-4 leading-relaxed">
-            Aimcab is a well-established cab and car rental service provider in India, specializing in long- and short-term car rental services. Our services guarantee safety, comfort, and reliability, with a professional team of drivers committed to providing accessible and safe cab services.
-          </p>
-          <p className="text-justify text-gray-700 mb-6 leading-relaxed">
-            Since its inception in 2001, Aimcab has been built on transparency in pricing and an unwavering commitment to quality. With a rapidly growing customer base, Aimcab continues to provide hassle-free, reliable rides. Our diverse vehicle options, including sedans and SUVs, ensure that our customers enjoy a comfortable experience every time.
-          </p>
-          <p className="text-justify text-gray-700 mb-6 leading-relaxed">
-            Whether you're booking a cab for a short trip or a long journey, Aimcab ensures your ride is easy, affordable, and safe. We are one of India's top online cab booking platforms, connecting passengers across 1000+ cities with trustworthy travel options.
-          </p>
-          <a
-            href="#"
-            className="inline-block mt-6 bg-yellow-600 text-white px-6 py-2 rounded-md text-lg font-semibold transform hover:scale-110 transition-all duration-300"
-          >
-            Book Now
-          </a>
-        </div>
-      </div>
-      {/* Right Column - Image */}
-      <div className="lg:w-6/12 md:w-6/12 mb-8 fade-in-right">
-  <div className="img-box relative">
-    <img
-      src="/images/slider-2.png"
-      alt="slider-2"
-      className="w-full h-full object-cover rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300 mt-48" // Shift the image further down with mt-24 (6rem)
-    />
-    <div className="absolute top-0 left-0 w-full h-full bg-black opacity-25 rounded-lg"></div>
+      <div className="lg:w-5/12 md:w-5/12 mb-8 animate__animated animate__fadeInLeft">
+  <div className="detail-box bg-yellow-200 p-8 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+    <h2 className="text-4xl font-bold text-gray-800 mb-4">About Aimcab</h2>
+    <p className="text-justify text-gray-700 mb-4 leading-relaxed">
+      At Aimcab, we pride ourselves on providing a seamless, reliable, and safe travel experience. Serving thousands of happy customers across India, we specialize in both short-term and long-term car rentals, airport transfers, and more. Our service is committed to your convenience and safety, every mile of the way.
+    </p>
+    <p className="text-justify text-gray-700 mb-4 leading-relaxed">
+      We started our journey in 2001 with a vision to make transportation more accessible and hassle-free. Today, we operate in over 1000 cities across India, connecting customers with trustworthy, professional drivers and top-notch vehicles. Our goal is to deliver an experience that is comfortable, stress-free, and most importantly, safe.
+    </p>
+    <p className="text-justify text-gray-700 mb-4 leading-relaxed">
+      Whether you're going on a business trip, family vacation, or a simple airport transfer, Aimcab offers a wide range of vehicles to cater to all your travel needs. With a fleet of well-maintained cars, including sedans and SUVs, we ensure that every ride is a smooth and enjoyable experience.
+    </p>
+    <p className="text-justify text-gray-700 mb-6 leading-relaxed">
+      Our transparent pricing, real-time booking system, and exceptional customer support make Aimcab the preferred choice for travelers across the country.
+    </p>
+    <a
+      href="/"
+      className="inline-block mt-6 bg-yellow-600 text-white px-6 py-2 rounded-md text-lg font-semibold transform hover:scale-110 transition-all duration-300"
+    >
+      Book Now
+    </a>
   </div>
 </div>
 
+
+      {/* Right Column - Additional Services and Benefits */}
+      <div className="lg:w-6/12 md:w-6/12 mb-8 animate__animated animate__fadeInRight flex justify-center">
+        <div className="info-box bg-yellow-200 p-8 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 w-full max-w-md">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Why Choose Aimcab?</h3>
+          <ul className="list-disc list-inside text-gray-700 mb-6">
+            <li className="mb-2">Affordable rates with no hidden fees.</li>
+            <li className="mb-2">Multiple vehicle options for every need: sedans, SUVs, luxury cars.</li>
+            <li className="mb-2">24/7 customer support to ensure your journey is hassle-free.</li>
+            <li className="mb-2">Easy and fast online booking with instant confirmations.</li>
+            <li className="mb-2">A wide network of experienced, professional drivers.</li>
+            <li className="mb-2">Well-maintained cars that prioritize your safety and comfort.</li>
+            <li className="mb-2">Track your ride in real-time with our intuitive mobile app.</li>
+          </ul>
+          <a
+            href="/#service"
+            className="inline-block bg-yellow-600 text-white px-6 py-2 rounded-md text-lg font-semibold transform hover:scale-110 transition-all duration-300"
+          >
+            Explore More
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -481,247 +505,228 @@ export default function Home() {
 <br></br>
 
 
-<section className="service_section layout_padding py-16 bg-gray-50" id="service">
-      <div className="container mx-auto">
-        <div className="heading_container text-center mb-10">
-          <h2 className="text-4xl font-bold text-gray-800 leading-tight mb-10 animate__animated animate__fadeInUp">
-            Our <br /> Services
-          </h2>
+<section className="service_section layout_padding py-16 px-8 bg-gradient-to-r from-yellow-400 to-orange-400" id="service">
+  <div className="container mx-auto">
+    <div className="heading_container text-center mb-12">
+      <h2 className="text-4xl font-bold text-gray-800 leading-tight mb-6 animate__animated animate__fadeInUp">
+        Our <span className="text-gray-800">Services</span>
+      </h2>
+
+      <p className="text-xl text-white opacity-80 mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+        Explore our wide range of services to make your travel easy and comfortable.
+      </p>
+    </div>
+    <div className="service_container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      
+      {/* Luxury Cars */}
+      <div className="box bg-white p-8 rounded-lg shadow-xl text-center transform transition-all hover:translate-y-[-12px] hover:shadow-2xl hover:duration-300 animate__animated animate__fadeInUp animate__delay-1s">
+        <div className="img-box mb-6">
+          <img src="/images/lexi.png" alt="Luxury Cars" height="90" width="90" className="transition-transform transform hover:scale-110" />
         </div>
-        <div className="service_container grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-          
-          {/* Luxury Cars */}
-          <div className="box bg-white p-8 rounded-lg shadow-lg text-center transform transition-all hover:translate-y-[-10px] hover:shadow-xl hover:duration-300 animate__animated animate__fadeInUp">
-            <div className="img-box mb-6">
-              <img src="/images/lexi.png" alt="Taxi" height="90" width="90" className="transition-transform transform hover:scale-110" />
-            </div>
-            <div className="detail-box">
-              <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500">Luxury Cars</h5>
-              <p className="text-gray-600 mb-4">Available All type Luxury Cars</p>
-              <a href="#LuxuryCarsBooking.tsx" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
-            </div>
-          </div>
-
-          {/* Corporate */}
-          <div className="box bg-white p-8 rounded-lg shadow-lg text-center transform transition-all hover:translate-y-[-10px] hover:shadow-xl hover:duration-300 animate__animated animate__fadeInUp">
-            <div className="img-box mb-6">
-              <img src="/images/s6.png" alt="S6" height="100" width="80" className="transition-transform transform hover:scale-110" />
-            </div>
-            <div className="detail-box">
-              <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500">Corporate</h5>
-              <p className="text-gray-600 mb-4">All type of Cab for Corporation</p>
-              <a href="tel:9130030054" className="text-blue-500 underline hover:text-blue-700">Call Us</a>
-            </div>
-          </div>
-
-          {/* Daily Pickup & Drop */}
-          <div className="box bg-white p-8 rounded-lg shadow-lg text-center transform transition-all hover:translate-y-[-10px] hover:shadow-xl hover:duration-300 animate__animated animate__fadeInUp">
-            <div className="img-box mb-6">
-              <img src="/images/s7.png" alt="S7" height="100" width="100" className="transition-transform transform hover:scale-110" />
-            </div>
-            <div className="detail-box">
-              <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500">Daily Pickup & Drop</h5>
-              <p className="text-gray-600 mb-4">Daily Cab Service</p>
-              <a href="tel:9130030054" className="text-blue-500 underline hover:text-blue-700">Call Us</a>
-            </div>
-          </div>
-
-          {/* Out Station Cab */}
-          <div className="box bg-white p-8 rounded-lg shadow-lg text-center transform transition-all hover:translate-y-[-10px] hover:shadow-xl hover:duration-300 animate__animated animate__fadeInUp">
-            <div className="img-box mb-6">
-              <img src="/images/out.png" alt="Out" width="100" height="100" className="transition-transform transform hover:scale-110" />
-            </div>
-            <div className="detail-box">
-              <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500">Out Station Cab</h5>
-              <p className="text-gray-600 mb-4">All type of Cab for Outstation trip</p>
-              <a href="https://aimcabbooking.com/#booking-form" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
-            </div>
-          </div>
-
-          {/* Airport Transport */}
-          <div className="box bg-white p-8 rounded-lg shadow-lg text-center transform transition-all hover:translate-y-[-10px] hover:shadow-xl hover:duration-300 animate__animated animate__fadeInUp">
-            <div className="img-box mb-6">
-              <img src="/images/airy.png" alt="Airy" height="100" width="100" className="transition-transform transform hover:scale-110" />
-            </div>
-            <div className="detail-box">
-              <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500">Airport Transport</h5>
-              <p className="text-gray-600 mb-4">Airport Pickup & Drop Service</p>
-              <a href="tel:9130030054" className="text-blue-500 underline hover:text-blue-700">Call Us</a>
-            </div>
-          </div>
-
+        <div className="detail-box">
+          <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Luxury Cars</h5>
+          <p className="text-gray-600 mb-4">Travel in style with our luxury car options.</p>
+          <a href="#LuxuryCarsBooking" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
         </div>
       </div>
-    </section>
+
+      {/* Corporate */}
+      <div className="box bg-white p-8 rounded-lg shadow-xl text-center transform transition-all hover:translate-y-[-12px] hover:shadow-2xl hover:duration-300 animate__animated animate__fadeInUp animate__delay-1s">
+        <div className="img-box mb-6">
+          <img src="/images/s6.png" alt="Corporate Service" height="100" width="80" className="transition-transform transform hover:scale-110" />
+        </div>
+        <div className="detail-box">
+          <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Corporate</h5>
+          <p className="text-gray-600 mb-4">Professional cabs for business and corporate needs.</p>
+          <a href="tel:9130030054" className="text-blue-500 underline hover:text-blue-700">Call Us</a>
+        </div>
+      </div>
+
+      {/* Daily Pickup & Drop */}
+      <div className="box bg-white p-8 rounded-lg shadow-xl text-center transform transition-all hover:translate-y-[-12px] hover:shadow-2xl hover:duration-300 animate__animated animate__fadeInUp animate__delay-2s">
+        <div className="img-box mb-6">
+          <img src="/images/s7.png" alt="Daily Pickup & Drop" height="100" width="100" className="transition-transform transform hover:scale-110" />
+        </div>
+        <div className="detail-box">
+          <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Daily Pickup & Drop</h5>
+          <p className="text-gray-600 mb-4">Reliable daily commute for work or personal travel.</p>
+          <a href="tel:9130030054" className="text-blue-500 underline hover:text-blue-700">Call Us</a>
+        </div>
+      </div>
+
+      {/* Out Station Cab */}
+      <div className="box bg-white p-8 rounded-lg shadow-xl text-center transform transition-all hover:translate-y-[-12px] hover:shadow-2xl hover:duration-300 animate__animated animate__fadeInUp animate__delay-3s">
+        <div className="img-box mb-6">
+          <img src="/images/out.png" alt="Out Station" width="100" height="100" className="transition-transform transform hover:scale-110" />
+        </div>
+        <div className="detail-box">
+          <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Out Station Cab</h5>
+          <p className="text-gray-600 mb-4">Book a cab for long-distance, out-of-town trips.</p>
+          <a href="https://aimcabbooking.com/#booking-form" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
+        </div>
+      </div>
+
+      {/* Airport Transport */}
+      <div className="box bg-white p-8 rounded-lg shadow-xl text-center transform transition-all hover:translate-y-[-12px] hover:shadow-2xl hover:duration-300 animate__animated animate__fadeInUp animate__delay-4s">
+        <div className="img-box mb-6">
+          <img src="/images/airy.png" alt="Airport Transport" height="100" width="100" className="transition-transform transform hover:scale-110" />
+        </div>
+        <div className="detail-box">
+          <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Airport Transport</h5>
+          <p className="text-gray-600 mb-4">Reliable airport pickup and drop services.</p>
+          <a href="tel:9130030054" className="text-blue-500 underline hover:text-blue-700">Call Us</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* Contact Section */}
       <section className="contact_section py-16 bg-gray-200" id="contact">
-      <div className="container mx-auto text-center mb-10">
-        <h2 className="text-4xl font-bold text-gray-800 leading-tight mb-10 animate__animated animate__fadeInUp">
-          Any Problems? Any Questions?
-        </h2>
-      </div>
-      <div className="container-fluid flex flex-wrap justify-center">
-
-        {/* Contact Form */}
-        <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6 animate__animated animate__fadeInUp">
-          <div className="contact_form p-8 bg-white shadow-lg rounded-lg hover:shadow-2xl transition-all duration-300 ease-in-out">
-            <h4 className="text-2xl font-semibold text-gray-800 mb-6">Get In Touch</h4>
-            <form action="index.php" method="POST">
-              <input
-                type="text"
-                name="full_name"
-                placeholder="Full Name"
-                className="w-full p-4 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email ID"
-                className="w-full p-4 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400"
-                required
-              />
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone Number"
-                className="w-full p-4 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400"
-                required
-              />
-              <textarea
-                name="message"
-                className="w-full p-4 mb-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400"
-                style={{ height: '150px' }}
-                placeholder="Message"
-                rows={5}
-                required
-              ></textarea>
-              <button
-                type="submit"
-                name="message_submit"
-                value="submit"
-                className="w-full py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300"
-              >
-                Send
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Contact Image */}
-        <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6 animate__animated animate__fadeInRight">
-          <div className="img-box">
-            <img
-              src="/images/slider-2.png"
-              alt="Contact"
-              className="w-full h-full object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300 ease-in-out"
-            />
-          </div>
-        </div>
-        
-      </div>
-    </section>
-
-      {/* Why Choose Us Section */}
-      <section className="why_section py-16 bg-gray-100" id="why-choose-us">
-  <div className="container mx-auto text-center mb-12">
+  <div className="container mx-auto text-center mb-10">
     <h2 className="text-4xl font-bold text-gray-800 leading-tight mb-10 animate__animated animate__fadeInUp">
-      Why <br />
-      Choose Us
+      Need a Ride? Book Your Cab Now!
     </h2>
   </div>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 animate__animated animate__fadeInUp">
-    {/* Best Drivers */}
-    <div className="box bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
-      <div className="img-box mb-4">
-        <img
-          src="/images/delivery-man-white.png"
-          alt="Best Drivers"
-          className="img-1 w-12 h-12 mx-auto mb-2"
-        />
-        <img
-          src="/images/delivery-man-black.png"
-          alt="Best Drivers"
-          className="img-2 w-16 h-16 mx-auto"
-        />
-      </div>
-      <div className="detail-box">
-        <h5 className="text-xl font-semibold text-gray-800 mb-2">Best Drivers</h5>
-        <p className="text-gray-600">
-          We have the best well-trained registered drivers to make your journey safe and secure.
+  <div className="container-fluid flex flex-wrap justify-center">
+
+    {/* Left Side: Cab Booking Info */}
+    <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6 animate__animated animate__fadeInUp">
+      <div className="p-8">
+        <h4 className="text-2xl font-semibold text-gray-800 mb-6">Easy and Convenient Cab Booking</h4>
+        <p className="text-lg text-gray-600 mb-6">
+          Our cab booking service is designed to make your travel smooth and hassle-free. Whether you are going to the airport, heading to a business meeting, or need a ride for a long trip, we have you covered with comfortable and reliable cars.
         </p>
+        <ul className="list-disc list-inside text-gray-600 mb-6">
+          <li className="mb-2">Choose from a variety of vehicles for every need.</li>
+          <li className="mb-2">Book instantly with just a few clicks.</li>
+          <li className="mb-2">24/7 support for a seamless experience.</li>
+          <li className="mb-2">Affordable prices with no hidden charges.</li>
+          <li className="mb-2">Pre-book your ride for peace of mind.</li>
+          <li className="mb-2">Real-time tracking for your cab.</li>
+          <li className="mb-2">Convenient online payments and cash options.</li>
+          <li className="mb-2">Ride in comfort with air-conditioned vehicles.</li>
+          <li className="mb-2">Wide service area coverage across cities and towns.</li>
+          <li className="mb-2">Safety protocols to ensure your well-being throughout the ride.</li>
+          <li className="mb-2">Fast and easy booking process with no hassle.</li>
+          <li className="mb-2">Our drivers are well-trained and professional.</li>
+          <li className="mb-2">Exclusive discounts and offers for loyal customers.</li>
+          <li className="mb-2">Option to schedule a ride for family, friends, or colleagues.</li>
+          <li className="mb-2">Environmental-friendly vehicles with lower emissions for sustainable travel.</li>
+        </ul>
+        <a
+          href="/"
+          className="w-full py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 text-center block"
+        >
+          Book Your Cab Now
+        </a>
       </div>
     </div>
 
-    {/* Safe and Secure */}
-    <div className="box bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
-      <div className="img-box mb-4">
-        <img
-          src="/images/shield-white.png"
-          alt="Safe and Secure"
-          className="img-1 w-12 h-12 mx-auto mb-2"
-        />
-        <img
-          src="/images/shield-black.png"
-          alt="Safe and Secure"
-          className="img-2 w-16 h-16 mx-auto"
-        />
-      </div>
-      <div className="detail-box">
-        <h5 className="text-xl font-semibold text-gray-800 mb-2">Safe and Secure</h5>
-        <p className="text-gray-600">
-          We are continuously working on providing the best safe and secure trips to our customers.
+    {/* Right Side: Additional Cab Booking Services */}
+    <div className="w-full lg:w-5/12 md:w-5/12 mb-8 px-6 animate__animated animate__fadeInRight">
+      <div className="p-8 mb-6">
+        <h4 className="text-2xl font-semibold text-gray-800 mb-6">Outstation Cabs</h4>
+        <p className="text-lg text-gray-600 mb-6">
+          Planning a trip outside the city? Book an outstation cab with us for a comfortable journey. Whether it's a weekend getaway or a business trip, we ensure your travel is convenient and safe.
         </p>
+        <ul className="list-disc list-inside text-gray-600 mb-6">
+          <li className="mb-2">Long-distance travel made easy and affordable.</li>
+          <li className="mb-2">Well-maintained cars for a comfortable ride.</li>
+          <li className="mb-2">Flexible booking options and pricing.</li>
+        </ul>
+        <a
+          href="/"
+          className="w-full py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 text-center block"
+        >
+          Book Outstation Cab
+        </a>
       </div>
-    </div>
-
-    {/* 24x7 Support */}
-    <div className="box bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
-      <div className="img-box mb-4">
-        <img
-          src="/images/repairing-service-white.png"
-          alt="24x7 Support"
-          className="img-1 w-12 h-12 mx-auto mb-2"
-        />
-        <img
-          src="/images/repairing-service-black.png"
-          alt="24x7 Support"
-          className="img-2 w-16 h-16 mx-auto"
-        />
-      </div>
-      <div className="detail-box">
-        <h5 className="text-xl font-semibold text-gray-800 mb-2">24x7 Support</h5>
-        <p className="text-gray-600">
-          We are available 24/7 to assist you at all times while using our service.
+      <br></br>
+      <div className="p-8">
+        <h4 className="text-2xl font-semibold text-gray-800 mb-6">Airport Transfers</h4>
+        <p className="text-lg text-gray-600 mb-6">
+          Need a ride to or from the airport? Our airport transfer service offers you a hassle-free, timely, and comfortable ride. Whether it's a pickup or drop-off, we've got your travel needs covered.
         </p>
-      </div>
-    </div>
-
-    {/* Happy Clients */}
-    <div className="box bg-white p-6 rounded-lg shadow-lg text-center hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
-      <div className="img-box mb-4">
-        <img
-          src="/images/c-w.png"
-          alt="Happy Clients"
-          className="img-1 w-12 h-12 mx-auto mb-2"
-        />
-        <img
-          src="/images/clients-black.png"
-          alt="Happy Clients"
-          className="img-2 w-16 h-16 mx-auto"
-        />
-      </div>
-      <div className="detail-box">
-        <h5 className="text-xl font-semibold text-gray-800 mb-2">Happy Clients</h5>
-        <p className="text-gray-600">
-          Everything starts with Customer's Happiness in Our Service. Hope you Enjoy It.
-        </p>
+        <ul className="list-disc list-inside text-gray-600 mb-6">
+          <li className="mb-2">Reliable and timely airport pickups and drops.</li>
+          <li className="mb-2">Easy online booking for your convenience.</li>
+          <li className="mb-2">Affordable and transparent pricing.</li>
+        </ul>
+        <a
+          href="/"
+          className="w-full py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-300 text-center block"
+        >
+          Book Airport Transfer
+        </a>
       </div>
     </div>
   </div>
 </section>
+
+
+
+      {/* Ready To Experience */}
+      <section className="cta-section bg-gradient-to-r bg-yellow-500">
+  <div className="max-w-8xl mx-auto text-center mb-12"> {/* Increased width here */}
+    <br></br>
+    <br></br>
+    {/* Heading */}
+    <h2 className="text-4xl font-bold text-white mb-6 animate__animated animate__fadeInUp animate__delay-1s">
+      Ready to Experience a Hassle-Free Ride?
+    </h2>
+    {/* Subheading */}
+    <p className="text-xl text-center text-gray-200 mb-8 animate__animated animate__fadeInUp animate__delay-1.5s">
+      Book your ride with Aimcab today! Whether it's a business trip, airport transfer, or a city ride, we provide reliable and comfortable transportation. Our experienced drivers ensure your journey is smooth, safe, and hassle-free.
+    </p>
+    {/* Book Now Button */}
+    <div className="text-center mb-12 animate__animated animate__fadeInUp animate__delay-2s">
+      <a
+        href="/"
+        className="inline-block bg-orange-600 text-white px-8 py-3 rounded-full text-xl font-semibold transform hover:scale-105 transition-all duration-300"
+      >
+        Book Your Ride Now
+      </a>
+    </div>
+    {/* Testimonial Box */}
+    <div className="testimonial-box relative bg-[url('/images/jpeg-logo.jpg')] bg-cover bg-center py-14 px-6 text-center rounded-lg shadow-2xl mb-12 animate__animated animate__fadeInUp animate__delay-2.5s">
+      {/* Overlay for blur and greyish effect */}
+      <div className="absolute inset-0 bg-black opacity-40 blur-sm"></div>
+  
+      <h3 className="text-2xl font-semibold text-black mb-4">
+        What Our Customers Say
+      </h3>
+      <p className="text-black text-lg italic mb-6">
+        "Aimcab made my travel experience so smooth and stress-free. The driver was friendly, and the car was spotless. Highly recommend!"
+      </p>
+      <p className="text-black text-sm">- Sarah J., Happy Traveler</p>
+    </div>
+
+    {/* Contact Us Section */}
+    <div className="text-center animate__animated animate__fadeInUp animate__delay-3s">
+      <h3 className="text-xl text-white mb-4">
+        Have Questions? We're Here to Help!
+      </h3>
+      <p className="text-gray-300 mb-6">
+        Our dedicated customer service team is available 24/7 to assist you with any queries or special requests. Reach out to us anytime!
+      </p>
+      <a
+        href="/Contact"
+        className="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300"
+      >
+        Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
     </div>
   );
 }

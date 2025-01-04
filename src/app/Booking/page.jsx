@@ -39,7 +39,7 @@ export default function Home() {
             model: 'Hatchback',
             description: 'Compact, efficient, and stylish. Our hatchback cars offer the perfect blend of practicality and fun for city driving.',
             price: calculateCarPrice('hatchback', tripType, days, distance, data.data.data),
-            image: '/images/ertiga.png',
+            image: '/images/hatchback.png',
             facilities: [
               { name: 'Snacks', icon: '/images/snacks.png' },
               { name: 'Water Bottle', icon: '/images/water.jpg' },
@@ -52,7 +52,7 @@ export default function Home() {
             model: 'Sedan',
             description: 'Elegant and spacious, our sedans provide a smooth and comfortable ride for every journey.',
             price: calculateCarPrice('sedan', tripType, days, distance, data.data.data),
-            image: '/images/innova.png',
+            image: '/images/sedan.jpg',
             facilities: [
               { name: 'Snacks', icon: '/images/snacks.png' },
               { name: 'Water Bottle', icon: '/images/water.jpg' },
@@ -65,7 +65,7 @@ export default function Home() {
             model: 'SUV',
             description: 'Rugged and versatile, our SUVs are perfect for both urban roads and adventurous terrains.',
             price: calculateCarPrice('suv', tripType, days, distance, data.data.data),
-            image: '/images/luxury.png',
+            image: '/images/suv.jpg',
             facilities: [
               { name: 'Snacks', icon: '/images/snacks.png' },
               { name: 'Water Bottle', icon: '/images/water.jpg' },
@@ -78,7 +78,7 @@ export default function Home() {
             model: 'MUV',
             description: 'MUVs offer spacious interiors and powerful performance for both city and off-road travels.',
             price: calculateCarPrice('suvplus', tripType, days, distance, data.data.data),
-            image: '/images/maruti.png',
+            image: '/images/muv.png',
             facilities: [
               { name: 'Snacks', icon: '/images/snacks.png' },
               { name: 'Water Bottle', icon: '/images/water.jpg' },
@@ -220,7 +220,7 @@ export default function Home() {
       <header className="bg-[#CDC7C7] w-full">
         <nav className="bg-[#CDC7C7] mb-0">
           <ul className="flex space-x-4 p-4">
-            <a href="/HomePae" g>Home</a>
+            <a href="/" g>Home</a>
             <li>About</li>
             <li className="relative">
               <button className="dropdown">Services</button>
