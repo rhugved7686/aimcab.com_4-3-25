@@ -12,7 +12,7 @@ export default function Navbar() {
         {/* Logo with fast animation */}
         <a href="#" className="flex items-center text-2xl font-semibold text-yellow-500 hover:text-yellow-400 transition-transform duration-300 ease-in-out transform hover:scale-105">
           <img
-            src="https://aimcabbooking.com/images/logo-png.png"
+            src="images/logo-png.png"
             alt="AIMCAB Logo"
             className="w-12 h-12 transform transition-transform duration-300 ease-in-out hover:rotate-12 hover:scale-105 animate__animated animate__fadeIn"
           />

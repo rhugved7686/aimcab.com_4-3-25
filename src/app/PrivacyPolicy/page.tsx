@@ -110,7 +110,7 @@ export default function PrivacyPolicy() {
           </p>
           <p className="text-gray-700 mb-4">
             AimCab, Privacy Team <br />
-            Email: privacy@aimcab.com <br />
+            Email: aimcabhelp@gmail.com <br />
             Phone: +91 9130030054
           </p>
         </section>

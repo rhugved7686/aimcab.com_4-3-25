@@ -135,9 +135,9 @@ export default function Home() {
     <div className="flex flex-col items-center">
 
       {/* Booking Form and Promo Section */}
-      <div className="relative w-full max-w-screen-xl flex p-0 m-0">
+      <div className="relative w-full flex flex-col lg:flex-row p-0 m-0">
   {/* Left side: Carousel/Promo Section */}
-  <div className="w-1/2 lg:w-1/2">  {/* Adjusted to 1/2 for full screen on smaller screens */}
+  <div className="w-full lg:w-1/2"> {/* Full width on small screens and 1/2 on large screens */}
     <div id="carouselExampleIndicators" className="carousel slide">
       <ol className="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
@@ -146,11 +146,10 @@ export default function Home() {
       <div className="carousel-inner relative overflow-hidden">
         <div className="carousel-item active">
           <div
-            className="bg-cover bg-fixed bg-center text-center min-h-[100vh] py-16 px-8"
+            className="bg-cover bg-fixed bg-center text-center min-h-[60vh] lg:min-h-[100vh] py-16 px-8"
             style={{ backgroundImage: 'url("/images/car.jpg")' }}
           >
-            <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay to improve text visibility */}
-            <br /><br /><br /><br /><br /><br />
+            <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay */}
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate__animated animate__fadeIn animate__delay-1s">
               15% off on One Way & Round Trips
             </h2>
@@ -173,24 +172,24 @@ export default function Home() {
 
   {/* Right side: Booking Form */}
   <div
-    className="w-1/2 lg:w-1/2 p-4 rounded-lg backdrop-blur-lg bg-white/30 relative"
+    className="w-full lg:w-1/2 p-4 rounded-lg backdrop-blur-lg bg-white/30 relative"
     style={{
       backgroundImage: 'url("/images/car.jpg")', 
       backgroundSize: 'cover', 
       backgroundPosition: 'center',
-      backgroundAttachment: 'fixed', // Ensures the background stays fixed when scrolling
-      minHeight: '100vh' // Ensures the background covers the full height
+      backgroundAttachment: 'fixed', // Fixed background for scrolling
+      minHeight: '100vh' // Ensures full height coverage
     }}
   >
-    <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay for booking form */}
+    <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay for form */}
     
     <LoadScript googleMapsApiKey="AIzaSyCelDo4I5cPQ72TfCTQW-arhPZ7ALNcp8w" libraries={['places']}>
       <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
         <h2 className="text-center text-2xl font-semibold">BOOK A CAB NOW</h2>
 
         {/* Trip Type Selection */}
-        <div className="flex space-x-4 mb-4">
-          <div className="w-1/3">
+        <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+          <div className="w-full lg:w-1/3">
             <h4 className="text-left text-sm">Trip Type</h4>
             <select
               className="w-full p-2 bg-yellow-300"
@@ -208,8 +207,8 @@ export default function Home() {
 
         {/* One Way Trip Inputs */}
         {tripType === 'One Way' && (
-          <div className="flex space-x-4 mb-4">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+            <div className="w-full lg:w-1/2">
               <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
                 <input
                   id='pickup-location'
@@ -223,7 +222,7 @@ export default function Home() {
                 />
               </Autocomplete>
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
                 <input
                   id="drop-location"
@@ -242,8 +241,8 @@ export default function Home() {
 
         {/* Round Trip Inputs */}
         {tripType === 'Round' && (
-          <div className="flex space-x-4 mb-4">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+            <div className="w-full lg:w-1/2">
               {/* Pickup and Drop Locations for Round Trip */}
               <Autocomplete onLoad={ref => pickupRef.current = ref} onPlaceChanged={() => handlePlaceChanged(pickupRef.current)}>
                 <input
@@ -258,7 +257,7 @@ export default function Home() {
                 />
               </Autocomplete>
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <Autocomplete onLoad={ref => dropRef.current = ref} onPlaceChanged={() => handlePlaceChanged(dropRef.current)}>
                 <input
                   id="drop-location"
@@ -276,8 +275,8 @@ export default function Home() {
         )}
 
         {/* Date and Time Inputs for Both Trip Types */}
-        <div className="flex space-x-4 mb-4">
-          <div className="w-1/2">
+        <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+          <div className="w-full lg:w-1/2">
             <h5 className="text-left text-sm">Choose Date</h5>
             <input
               className="w-full p-2 mb-2"
@@ -288,7 +287,7 @@ export default function Home() {
               required
             />
           </div>
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2">
             <h5 className="text-left text-sm">Choose Time</h5>
             <input
               className="w-full p-2 mb-2"
@@ -303,8 +302,8 @@ export default function Home() {
 
         {/* Return Date and Time (For Round Trip) */}
         {tripType === 'Round' && (
-          <div className="flex space-x-4 mb-4">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+            <div className="w-full lg:w-1/2">
               <h5 className="text-left text-sm">Return Date</h5>
               <input
                 className="w-full p-2 mb-2"
@@ -314,7 +313,7 @@ export default function Home() {
                 onChange={handleChange}
               />
             </div>
-            <div className="w-1/2">
+            <div className="w-full lg:w-1/2">
               <h5 className="text-left text-sm">Return Time</h5>
               <input
                 className="w-full p-2 mb-2"
@@ -329,8 +328,8 @@ export default function Home() {
 
         {/* Rental Package Selection */}
         {tripType === 'Rental' && (
-          <div className="flex space-x-4 mb-4">
-            <div className="w-1/2">
+          <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+            <div className="w-full lg:w-1/2">
               <h5 className="text-left text-sm">Choose Package</h5>
               <select
                 className="w-full p-2 bg-yellow-300"
@@ -347,8 +346,8 @@ export default function Home() {
         )}
 
         {/* Personal Details Inputs */}
-        <div className="flex space-x-4 mb-4">
-          <div className="w-1/3">
+        <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 mb-4">
+          <div className="w-full lg:w-1/3">
             <input
               className="w-full p-2 mb-2"
               name="name"
@@ -359,7 +358,7 @@ export default function Home() {
               required
             />
           </div>
-          <div className="w-1/3">
+          <div className="w-full lg:w-1/3">
             <input
               className="w-full p-2 mb-2"
               name="phone"
@@ -370,7 +369,7 @@ export default function Home() {
               required
             />
           </div>
-          <div className="w-1/3">
+          <div className="w-full lg:w-1/3">
             <input
               className="w-full p-2 mb-2"
               name="email"
@@ -392,18 +391,16 @@ export default function Home() {
             <div role="status">
               <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
-                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.26397C38.0464 1.85794 34.6077 3.81089 31.7067 6.83346C28.8057 9.85603 26.4988 13.9779 24.8767 18.6069C23.9546 22.2496 24.3354 25.9881 26.0894 29.2312C28.678 33.5108 33.5666 35.3819 37.6969 33.6811C41.8256 31.9782 45.3154 28.5931 47.8725 24.5709C50.4296 20.5487 52.0466 15.9619 53.4876 11.2475C54.9286 6.53307 56.1886 1.73331 57.3627 -3.00783C58.5367 -7.74997 59.6168 -12.7629 60.5897 -17.4754C62.0171 -26.1083 66.1224 -34.6495 72.2163 -41.2626C78.5842 -48.4905 86.3361 -54.5101 94.3967 -59.8195C96.393 -60.6322 97.8624 -63.1241 97.0079 -65.4955C93.9676 -68.9319 86.0332 -70.6225 80.6571 -67.1604C75.2124 -63.6464 72.5235 -57.9173 72.1647 -51.4052C71.8059 -44.8932 73.7405 -38.3776 75.6847 -34.8938" fill="white" />
               </svg>
-              <span>Loading...</span>
             </div>
-          ) : (
-            <span>Book Now</span> // Text when not loading
-          )}
+          ) : 'Submit'}
         </button>
       </form>
     </LoadScript>
   </div>
 </div>
+
 
 
 
@@ -506,7 +503,7 @@ export default function Home() {
         <div className="detail-box">
           <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Luxury Cars</h5>
           <p className="text-gray-600 mb-4">Travel in style with our luxury car options.</p>
-          <a href="#LuxuryCarsBooking" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
+          <a href="/" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
         </div>
       </div>
 
@@ -542,7 +539,7 @@ export default function Home() {
         <div className="detail-box">
           <h5 className="text-xl font-semibold text-gray-800 mb-3 hover:text-blue-500 transition-colors">Out Station Cab</h5>
           <p className="text-gray-600 mb-4">Book a cab for long-distance, out-of-town trips.</p>
-          <a href="https://aimcabbooking.com/#booking-form" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
+          <a href="/" className="text-blue-500 underline hover:text-blue-700">Book Now</a>
         </div>
       </div>
 
@@ -651,59 +648,57 @@ export default function Home() {
 
 
       {/* Ready To Experience */}
-      <section className="cta-section bg-gradient-to-r bg-yellow-500">
-  <div className="max-w-8xl mx-auto text-center mb-12"> {/* Increased width here */}
-    <br></br>
-    <br></br>
+      <section className="cta-section bg-gradient-to-r bg-yellow-500 py-16 sm:py-24">
+  <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 mb-12">
     {/* Heading */}
-    <h2 className="text-4xl font-bold text-white mb-6 animate__animated animate__fadeInUp animate__delay-1s">
+    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 animate__animated animate__fadeInUp animate__delay-1s">
       Ready to Experience a Hassle-Free Ride?
     </h2>
     {/* Subheading */}
-    <p className="text-xl text-center text-gray-200 mb-8 animate__animated animate__fadeInUp animate__delay-1.5s">
+    <p className="text-base sm:text-lg lg:text-xl text-center text-gray-200 mb-8 animate__animated animate__fadeInUp animate__delay-1.5s">
       Book your ride with Aimcab today! Whether it's a business trip, airport transfer, or a city ride, we provide reliable and comfortable transportation. Our experienced drivers ensure your journey is smooth, safe, and hassle-free.
     </p>
     {/* Book Now Button */}
     <div className="text-center mb-12 animate__animated animate__fadeInUp animate__delay-2s">
       <a
         href="/"
-        className="inline-block bg-orange-600 text-white px-8 py-3 rounded-full text-xl font-semibold transform hover:scale-105 transition-all duration-300"
+        className="inline-block bg-orange-600 text-white px-6 py-3 rounded-full text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300"
       >
         Book Your Ride Now
       </a>
     </div>
     {/* Testimonial Box */}
-    <div className="testimonial-box relative bg-[url('/images/jpeg-logo.jpg')] bg-cover bg-center py-14 px-6 text-center rounded-lg shadow-2xl mb-12 animate__animated animate__fadeInUp animate__delay-2.5s">
-  {/* Overlay for blur and greyish effect */}
-  <div className="absolute inset-0 bg-black opacity-60 blur-sm"></div>
+    <div className="testimonial-box relative bg-[url('/images/jpeg-logo.jpg')] bg-cover bg-center py-10 px-6 text-center rounded-lg shadow-2xl mb-12 animate__animated animate__fadeInUp animate__delay-2.5s">
+      {/* Overlay for blur and greyish effect */}
+      <div className="absolute inset-0 bg-black opacity-60 blur-sm"></div>
 
-  <h3 className="text-3xl font-bold text-black mb-4">
-    What Our Customers Say
-  </h3>
-  <p className="text-black text-lg italic mb-6">
-    "Aimcab made my travel experience so smooth and stress-free. The driver was friendly, and the car was spotless. Highly recommend!"
-  </p>
-  <p className="text-black text-sm">- Sarah J., Happy Traveler</p>
-</div>
-
+      <h3 className="text-2xl sm:text-3xl font-bold text-black mb-4">
+        What Our Customers Say
+      </h3>
+      <p className="text-black text-lg italic mb-6">
+        "Aimcab made my travel experience so smooth and stress-free. The driver was friendly, and the car was spotless. Highly recommend!"
+      </p>
+      <p className="text-black text-sm">- Sarah J., Happy Traveler</p>
+    </div>
 
     {/* Contact Us Section */}
     <div className="text-center animate__animated animate__fadeInUp animate__delay-3s">
-      <h3 className="text-xl text-white mb-4">
+      <h3 className="text-lg sm:text-xl lg:text-2xl text-white mb-4">
         Have Questions? We're Here to Help!
       </h3>
-      <p className="text-gray-300 mb-6">
+      <p className="text-sm sm:text-base lg:text-lg text-gray-300 mb-6">
         Our dedicated customer service team is available 24/7 to assist you with any queries or special requests. Reach out to us anytime!
       </p>
       <a
         href="/Contact"
-        className="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold transform hover:scale-105 transition-all duration-300"
+        className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300"
       >
         Contact Us
       </a>
     </div>
   </div>
 </section>
+
 
 
 
