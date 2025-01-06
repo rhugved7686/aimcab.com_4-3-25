@@ -24,7 +24,7 @@ export default function Navbar() {
           <a href="tel:9130030054" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-0.2s">
             <i className="fas fa-phone-alt fa-lg"></i> Call Us
           </a>
-          <a href="#home" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-0.4s">
+          <a href="/" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-0.4s">
             Home
           </a>
           <a href="#about" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-0.6s">
@@ -36,7 +36,7 @@ export default function Navbar() {
           <a href="#contact" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-1s">
             Contact
           </a>
-          <a href="/user" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-1.2s">
+          <a href="/User" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-1.2s">
             <img
               src="images/admin.jpg"
               alt="User Avatar"

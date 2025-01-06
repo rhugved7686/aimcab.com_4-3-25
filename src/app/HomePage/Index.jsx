@@ -149,6 +149,12 @@ export default function Home() {
             className="bg-cover bg-fixed bg-center text-center min-h-[60vh] lg:min-h-[100vh] py-16 px-8"
             style={{ backgroundImage: 'url("/images/car.jpg")' }}
           >
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay */}
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate__animated animate__fadeIn animate__delay-1s">
               15% off on One Way & Round Trips
@@ -405,9 +411,9 @@ export default function Home() {
 
 
 
-
+{/* 
       <br></br>
-      <br></br>
+      <br></br> */}
 
       {/* About Section */}
       <section 
@@ -478,8 +484,8 @@ export default function Home() {
     </div>
   </div>
 </section>
-<br></br>
-<br></br>
+{/* <br></br>
+<br></br> */}
 
 
 <section className="service_section layout_padding py-16 px-8 bg-gradient-to-r from-yellow-400 to-orange-400" id="service">
@@ -648,8 +654,8 @@ export default function Home() {
 
 
       {/* Ready To Experience */}
-      <section className="cta-section bg-gradient-to-r bg-yellow-500 py-16 sm:py-24">
-  <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8 mb-12">
+      <section className="cta-section bg-gradient-to-r bg-yellow-500 py-16 sm:py-24 w-full">
+  <div className="w-full text-center px-4 sm:px-6 lg:px-8 mb-12">
     {/* Heading */}
     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 animate__animated animate__fadeInUp animate__delay-1s">
       Ready to Experience a Hassle-Free Ride?
@@ -667,10 +673,10 @@ export default function Home() {
         Book Your Ride Now
       </a>
     </div>
-    {/* Testimonial Box */}
-    <div className="testimonial-box relative bg-[url('/images/jpeg-logo.jpg')] bg-cover bg-center py-10 px-6 text-center rounded-lg shadow-2xl mb-12 animate__animated animate__fadeInUp animate__delay-2.5s">
+    {/* Testimonial Box with Yellow Background */}
+    <div className="testimonial-box relative bg-yellow-500 py-10 px-6 text-center rounded-lg shadow-2xl mb-12 animate__animated animate__fadeInUp animate__delay-2.5s">
       {/* Overlay for blur and greyish effect */}
-      <div className="absolute inset-0 bg-black opacity-60 blur-sm"></div>
+      <div className="absolute inset-0 "></div>
 
       <h3 className="text-2xl sm:text-3xl font-bold text-black mb-4">
         What Our Customers Say
@@ -698,6 +704,8 @@ export default function Home() {
     </div>
   </div>
 </section>
+
+
 
 
 
