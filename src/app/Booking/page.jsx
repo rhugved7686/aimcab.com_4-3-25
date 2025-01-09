@@ -226,7 +226,7 @@ export default function Home() {
               <button className="dropdown">Services</button>
               <ul className="dropdown-menu absolute left-0 hidden bg-white border border-gray-200">
                 <li><a href="#">Service 1</a></li>
-                <li className="submenu">
+                <li Name="submenu">
                   <a href="#">Service 2</a>
                   <ul className="submenu-left bg-white">
                     <li><a href="#">Sub Service 1</a></li>

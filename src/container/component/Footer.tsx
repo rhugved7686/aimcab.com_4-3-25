@@ -44,7 +44,7 @@ export default function Footer() {
 
       {/* Designed by Section */}
       <div className="container mx-auto px-4 text-center text-white mb-8">
-      <h4>Designed by <a href="https://cobaztech.com" target="_blank" class="text-yellow-400 hover:text-white">Cobaztech</a></h4>
+      <h4>Designed by <a href="https://cobaztech.com" target="_blank" className="text-yellow-400 hover:text-white">Cobaztech</a></h4>
 
       </div>
 
