@@ -1,11 +1,34 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';  // Import useRouter for navigation
 
 const UserPage = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
+  const router = useRouter(); // Initialize useRouter
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
+  };
+
+  // Static credentials
+  const staticLoginCredentials = {
+    email: 'user@gmail.com',
+    password: 'user123',
+  };
+
+  const handleSubmitLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // Check if the entered credentials are correct
+    if (email === staticLoginCredentials.email && password === staticLoginCredentials.password) {
+      alert('Login successful');
+      router.push('/');  // Navigate to home page after successful login
+    } else {
+      alert('Invalid credentials');
+    }
   };
 
   return (
@@ -16,7 +39,7 @@ const UserPage = () => {
         </h2>
 
         {isLogin ? (
-          <form action="/login" method="post">
+          <form onSubmit={handleSubmitLogin}>
             <div className="mb-4">
               <input
                 type="email"
