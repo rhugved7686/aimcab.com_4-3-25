@@ -37,11 +37,11 @@ export default function Navbar() {
             Contact
           </a>
           <a href="/User" className="text-white text-lg hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-1.2s">
-            <img
+            {/* <img
               src="images/admin.jpg"
               alt="User Avatar"
               className="rounded-full w-10 h-10 border-2 border-yellow-500 transform transition-all duration-200 hover:scale-105"
-            />
+            /> */}
           </a>
         </div>
 
@@ -77,11 +77,11 @@ export default function Navbar() {
             Contact
           </a>
           <a href="/user" className="text-white text-xl hover:text-yellow-400 transition-all duration-200 transform hover:scale-105 animate__animated animate__fadeIn animate__delay-1.2s">
-            <img
+            {/* <img
               src="images/admin.jpg"
               alt="User Avatar"
               className="rounded-full w-12 h-12 border-2 border-yellow-500 transform transition-all duration-200 hover:scale-105"
-            />
+            /> */}
           </a>
         </div>
       </div>

@@ -8,18 +8,20 @@ export default function City() {
   const handleBookNowClick = () => {
     router.push('/'); // Navigates to the index page
   };
+  // Ensure city is always a string and not undefined or an array
+const formattedCity = city ? String(city).replace(/([a-z])([A-Z])/g, "$1 $2") : "Unknown City";
 
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header Section */}
       <header className="bg-green-500 text-white py-4 text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold">{`AIMCAB - ${city} Route`}</h1>
-        <p className="mt-2 text-lg sm:text-xl">Book your cab for a smooth journey from {city}</p>
+        <h1 className="text-3xl sm:text-4xl font-bold">{`AIMCAB - ${formattedCity} Route`}</h1>
+        <p className="mt-2 text-lg sm:text-xl">Book your cab for a smooth journey from {formattedCity}</p>
       </header>
 
       {/* Route Information Section */}
       <section className="mt-8 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-center text-gray-700">{city} - A Comfortable Journey</h2>
+        <h2 className="text-2xl sm:text-3xl font-semibold text-center text-gray-700">{formattedCity} - A Comfortable Journey</h2>
         <div className="mt-6 bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-xl sm:text-2xl font-semibold text-green-500 mt-4">Route Highlights</h3>
           <ul className="list-disc list-inside text-gray-600 mt-2">

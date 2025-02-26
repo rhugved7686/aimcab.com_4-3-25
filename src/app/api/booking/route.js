@@ -1,5 +1,5 @@
-import Trip from "../../../model/Trip"
-import sequelize, { initializeDatabase } from "../../../utils/connectDB";
+import Trip from "../../../model/Trip";
+import  { initializeDatabase, sequelize } from "../../../utils/connectDB";
 import { NextResponse } from "next/server";
 
 // Ensure the database connection is initialized
@@ -10,7 +10,7 @@ export const POST = async (req) => {
         // Parse the request body and ensure it's a valid JSON payload
         const data = await req.json();  // Use req.json() to parse JSON request body in Next.js API routes
         console.log(data);
-        const trip = await Trip.create({...data});
+        const trip = await Trip.create({ ...data });
         
         return NextResponse.json({ message: "Trip created successfully", trip }); // Send a JSON response with a success message
     } catch (error) {
@@ -26,5 +26,3 @@ export const POST = async (req) => {
         }
     }
 };
-
-
