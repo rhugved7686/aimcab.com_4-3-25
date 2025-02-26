@@ -97,7 +97,7 @@ export default function Home() {
 
       // Post visitor data
       try {
-        const response = await axios.post("/api/visit", visitor)
+        const response = axios.post("/api/visit", visitor)
         console.log("Visitor data posted successfully:", response.data)
       } catch (apiError) {
         console.error("Error posting visitor data:", apiError)
