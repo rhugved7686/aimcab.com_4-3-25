@@ -1,7 +1,6 @@
-// connectDB.js
-import mysql from 'mysql2/promise';
-import { Sequelize } from 'sequelize';
-import { LRUCache } from 'lru-cache';
+import mysql from "mysql2/promise";
+import { Sequelize } from "sequelize";
+import { LRUCache } from "lru-cache";
 
 let pool = null;
 const queryCache = new LRUCache({ max: 100, ttl: 1000 * 60 * 5 }); // Cache for 5 minutes
@@ -10,7 +9,7 @@ const MAX_RETRIES = 5;
 const INITIAL_RETRY_DELAY = 1000; // 1 second
 
 // Sequelize initialization
-export const sequelize = new Sequelize({
+const sequelize = new Sequelize({
   host: "193.203.184.167",
   dialect: "mysql",
   username: "u364027494_aimcabbo",
@@ -93,4 +92,4 @@ export const releaseConnection = (connection) => {
 };
 
 // Export the Sequelize instance for use in models
-export { sequelize };
+export { sequelize };  // This is the only export of `sequelize` now
