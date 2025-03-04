@@ -1,6 +1,7 @@
-import mysql from "mysql2/promise";
-import { Sequelize } from "sequelize";
-import { LRUCache } from "lru-cache";
+// connectDB.js
+import mysql from 'mysql2/promise';
+import { Sequelize } from 'sequelize';
+import { LRUCache } from 'lru-cache';
 
 let pool = null;
 const queryCache = new LRUCache({ max: 100, ttl: 1000 * 60 * 5 }); // Cache for 5 minutes
@@ -9,14 +10,14 @@ const MAX_RETRIES = 5;
 const INITIAL_RETRY_DELAY = 1000; // 1 second
 
 // Sequelize initialization
-const sequelize = new Sequelize({
+export const sequelize = new Sequelize({
   host: "193.203.184.167",
   dialect: "mysql",
   username: "u364027494_aimcabbo",
   password: "Password@181298",
   database: "u364027494_aimcabbo_admin",
   dialectModule: require("mysql2"),
-  benchmark:true,
+  benchmark: true,
   logging: false,  // Turn off logging, set to true to see SQL queries
 });
 

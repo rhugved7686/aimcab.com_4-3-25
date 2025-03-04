@@ -1,6 +1,6 @@
 // models/Trip.js
 import { DataTypes } from 'sequelize';
-import sequelize from '../utils/connectDB';
+import { sequelize } from '../utils/connectDB'; // Correct import for named export
 
 const Visitor = sequelize.define('Visitor', {
   id: {
