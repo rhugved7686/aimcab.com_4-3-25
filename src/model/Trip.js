@@ -5,7 +5,7 @@ import { sequelize } from '../utils/connectDB';
 if (!sequelize) {
   throw new Error("Sequelize instance is undefined. Ensure the database connection is initialized properly.");
 }
-
+ 
 const Trip = sequelize.define('Trip', {
     id: {
         type: DataTypes.INTEGER,

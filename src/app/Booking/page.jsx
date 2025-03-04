@@ -48,7 +48,7 @@ export default function Home() {
             name: "Sedan",
             model: "Sedan",
             price: calculateCarPrice("sedan", tripType, days, distance, data.data.data),
-            image: "/images/sedan.jpg",
+            image: "/images/etios.jpg",
             facilities: [
               { name: "Snacks", icon: "/images/snacks.png" },
               { name: "Water Bottle", icon: "/images/water.jpg" },
@@ -60,7 +60,7 @@ export default function Home() {
             name: "SUV",
             model: "SUV",
             price: calculateCarPrice("suv", tripType, days, distance, data.data.data),
-            image: "/images/suv.jpg",
+            image: "/images/muv.png",
             facilities: [
               { name: "Snacks", icon: "/images/snacks.png" },
               { name: "Water Bottle", icon: "/images/water.jpg" },
@@ -72,7 +72,7 @@ export default function Home() {
             name: "MUV",
             model: "MUV",
             price: calculateCarPrice("suvplus", tripType, days, distance, data.data.data),
-            image: "/images/muv.png",
+            image: "/images/innova.jpg",
             facilities: [
               { name: "Snacks", icon: "/images/snacks.png" },
               { name: "Water Bottle", icon: "/images/water.jpg" },
@@ -163,7 +163,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="bg-[#F8F9FA]">
         {/* Hero Section */}
-        <section className="text-center py-16 bg-gradient-to-r from-[#faa499] to-[#f7dd85]">
+        <section className="text-center py-4 bg-gradient-to-r from-[#faa499] to-[#f7dd85]">
           <h1 className="text-4xl font-bold">Welcome to Our Car Rental Service</h1>
           <p className="text-xl mt-4">Explore the best cars available for your trips.</p>
         </section>
@@ -284,4 +284,3 @@ export default function Home() {
     </div>
   )
 }
-
